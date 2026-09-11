@@ -1,0 +1,13 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    {
+      "source": "/why-imagi-archive",
+      "destination": "/index.html"
+    },
+    {
+      "source": "/why-imagi-archive.html",
+      "destination": "/index.html"
+    }
+  ]
+}
