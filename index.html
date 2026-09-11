@@ -228,7 +228,7 @@ body::before{
 #story.show{opacity:1}
 /* gate: story is sealed until a book is pulled from the hero */
 #story.sealed{max-height:0;overflow:hidden;opacity:0;pointer-events:none}
-#finale.sealed,#endmark.sealed,.dev-toggle.sealed{display:none}
+#finale.sealed,#endmark.sealed{display:none}
 
 /* a book being pulled off the shelf */
 .book.pulling{transform:translateY(-58px) rotate(-4deg) scale(1.04);box-shadow:8px 12px 0 rgba(41,41,41,.3);z-index:9}
@@ -476,16 +476,6 @@ body::before{
 .end-home:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
 @media(max-width:900px){.end-mark{padding-bottom:88px}}  /* clear the mobile chapter strip */
 
-/* DEV */
-.dev-toggle{position:fixed;bottom:70px;right:14px;z-index:750;font-family:var(--mono);font-size:.54rem;background:var(--charcoal);color:#9a9488;border:none;padding:7px 9px;cursor:pointer;box-shadow:var(--hard);opacity:.6}
-.dev-toggle:hover{opacity:1;color:var(--yellow)}
-@media(min-width:901px){.dev-toggle{bottom:14px}}
-#asset-checklist{display:none;padding:56px 22px;max-width:900px;margin:0 auto;background:var(--paper-2)}
-#asset-checklist.show{display:block}
-#asset-checklist h3{font-family:var(--mono);color:var(--charcoal);margin-bottom:18px;font-size:.8rem;letter-spacing:.03em}
-#asset-checklist table{width:100%;border-collapse:collapse;font-size:.8rem;background:var(--white);border:1px solid var(--paper-edge)}
-#asset-checklist td,#asset-checklist th{border-bottom:1px solid var(--paper-edge);padding:9px 11px;text-align:left}
-#asset-checklist th{font-family:var(--mono);font-size:.6rem;color:var(--pink)}
 </style>
 </head>
 <body>
@@ -774,34 +764,6 @@ body::before{
 
 <div class="end-mark sealed" id="endmark">◆ END OF ARCHIVE ◆<button type="button" class="end-home" id="endHome">◂ BACK TO THE SHELF</button></div>
 
-<!-- ============ DEV ============ -->
-<button class="dev-toggle sealed" id="devToggle">DEV · ASSETS</button>
-<section id="asset-checklist">
-  <h3>ASSET CHECKLIST — replace placeholders before sending</h3>
-  <table>
-    <thead><tr><th>ID</th><th>Asset needed</th><th>Purpose</th></tr></thead>
-    <tbody>
-      <tr><td>01</td><td>Childhood / early technology</td><td>Chapter 1</td></tr>
-      <tr><td>02</td><td>Early graphic design</td><td>Chapter 1</td></tr>
-      <tr><td>03</td><td>Design evolution</td><td>Chapter 1</td></tr>
-      <tr><td>04</td><td>Education / university</td><td>Chapter 2</td></tr>
-      <tr><td>05</td><td>Early Product Design</td><td>Chapter 2</td></tr>
-      <tr><td>06</td><td>TechCrush teaching</td><td>Chapter 3</td></tr>
-      <tr><td>07</td><td>Teaching children</td><td>Chapter 3</td></tr>
-      <tr><td>08</td><td>Student testimonials</td><td>Chapter 3</td></tr>
-      <tr><td>09</td><td>First AI workflow</td><td>Chapter 4</td></tr>
-      <tr><td>10</td><td>AI workflow (pipeline)</td><td>Chapter 4</td></tr>
-      <tr><td>11</td><td>Claude Code / building</td><td>Chapter 4</td></tr>
-      <tr><td>12</td><td>imagi discovery</td><td>Chapter 5</td></tr>
-      <tr><td>13</td><td>Research rabbit hole</td><td>Chapter 5</td></tr>
-      <tr><td>14</td><td>Dora + Beatrice</td><td>Chapter 5</td></tr>
-      <tr><td>15</td><td>MindWell</td><td>Chapter 6</td></tr>
-      <tr><td>16</td><td>Ewave</td><td>Chapter 6</td></tr>
-      <tr><td>17</td><td>Design + Build</td><td>Chapter 6</td></tr>
-    </tbody>
-  </table>
-</section>
-
 <script>
 (function(){
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -821,13 +783,13 @@ body::before{
     if(opened){document.getElementById(targetId).scrollIntoView({behavior:reduce?'auto':'smooth'});return;}
     opened=true;
     var story=document.getElementById('story'),finale=document.getElementById('finale');
-    var endmark=document.getElementById('endmark'),devt=document.getElementById('devToggle');
+    var endmark=document.getElementById('endmark');
     var hero=document.getElementById('hero');
     if(hero) hero.classList.add('book-open');
     if(pulledBook)pulledBook.classList.add('pulling');
     var run=function(){
       story.classList.remove('sealed');finale.classList.remove('sealed');
-      endmark.classList.remove('sealed');devt.classList.remove('sealed');
+      endmark.classList.remove('sealed');
       var hero=document.getElementById('hero');hero.classList.add('opening');
       setTimeout(function(){hero.style.display='none';onScroll();
         document.getElementById(targetId).scrollIntoView({behavior:reduce?'auto':'smooth'});
@@ -844,7 +806,7 @@ body::before{
     var pulled=hero.querySelector('.book.pulling');
     if(pulled)pulled.classList.remove('pulling');
     hero.classList.remove('book-open');
-    ['story','finale','endmark','devToggle'].forEach(function(id){
+    ['story','finale','endmark'].forEach(function(id){
       document.getElementById(id).classList.add('sealed');
     });
     hero.style.display='';
@@ -1056,8 +1018,6 @@ body::before{
   /* SIGN-OFF guard */
   document.querySelectorAll('.signoff .links a').forEach(function(a){a.addEventListener('click',function(e){if(a.getAttribute('href')==='#'){e.preventDefault();var old=a.textContent;a.textContent='ADD LINK ▸';setTimeout(function(){a.textContent=old;},1200);}});});
 
-  /* DEV */
-  document.getElementById('devToggle').addEventListener('click',function(){document.getElementById('asset-checklist').classList.toggle('show');});
 
   onScroll();
 })();
