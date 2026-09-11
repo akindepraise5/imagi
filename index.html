@@ -210,7 +210,8 @@ body::before{
 /* mobile: horizontal spine strip */
 #mshelf{
   position:fixed;bottom:0;left:0;right:0;z-index:600;display:none;gap:6px;
-  padding:10px 12px;background:linear-gradient(to top,var(--paper) 70%,transparent);
+  padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:linear-gradient(to top,var(--paper) 70%,transparent);
+  overscroll-behavior-x:contain;
   overflow-x:auto;-webkit-overflow-scrolling:touch;transform:translateY(120%);transition:transform .4s var(--ease);
 }
 #mshelf.show{transform:none}
@@ -886,6 +887,19 @@ body::before{
   });
   var spines=shelf.querySelectorAll('.spine'),mspines=mshelf.querySelectorAll('.mspine');
 
+  /* keep the active chip in view as the reader moves between chapters */
+  var lastActive=-1;
+  function followActive(i){
+    if(i===lastActive)return;
+    lastActive=i;
+    var chip=mspines[i];
+    if(!chip||!mshelf.clientWidth)return;   /* strip is hidden on desktop */
+    var max=mshelf.scrollWidth-mshelf.clientWidth;
+    if(max<=0)return;
+    var left=chip.offsetLeft-(mshelf.clientWidth-chip.offsetWidth)/2;
+    mshelf.scrollTo({left:Math.max(0,Math.min(left,max)),behavior:reduce?'auto':'smooth'});
+  }
+
   /* REVEAL */
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -6% 0px'});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
@@ -911,6 +925,7 @@ body::before{
     chSections.forEach(function(sec,i){if(sec.offsetTop<=mid)active=i;});
     spines.forEach(function(s,i){s.classList.toggle('active',i===active);});
     mspines.forEach(function(s,i){s.classList.toggle('active',i===active);});
+    followActive(active);
     if(chapters[active]){filetag.innerHTML='CASE FILE <b>'+chapters[active].n+'</b> / 07 <span class="ft-t">— '+chapters[active].t+'</span>';}
   }
   window.addEventListener('scroll',onScroll,{passive:true});
