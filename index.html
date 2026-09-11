@@ -1,2231 +1,878 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Why I Want to Build With imagi — Praise Akinde · Personal Archive</title>
-  <meta name="description"
-    content="A personal archive by Praise Akinde. About a computer, a teacher, an AI, and why I ended up here.">
-  <meta name="theme-color" content="#292929">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Space+Mono:wght@400;700&family=Silkscreen:wght@400;700&display=swap"
-    rel="stylesheet">
-  <style>
-    /* ============================================================
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Why I Want to Build With imagi — Praise Akinde · Personal Archive</title>
+<meta name="description" content="A personal archive by Praise Akinde. About a computer, a teacher, an AI, and why I ended up here.">
+<meta name="theme-color" content="#F8F6EE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Space+Mono:wght@400;700&family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
    THE PERSONAL ARCHIVE — editorial storybook / case file
    imagi retro-tech + editorial + archival documents
    ============================================================ */
-    :root {
-      --purple: #4600FF;
-      --purple-ink: #3400c4;
-      --yellow: #FAF578;
-      --pink: #FF00FF;
-      --white: #FFFFFF;
-      --paper: #F8F6EE;
-      --paper-2: #F1EEE1;
-      /* raised paper */
-      --paper-edge: #E4E0D0;
-      --charcoal: #292929;
-      --muted: #7a766a;
+:root{
+  --purple:#4600FF;
+  --purple-ink:#3400c4;
+  --yellow:#FAF578;
+  --pink:#FF00FF;
+  --white:#FFFFFF;
+  --paper:#F8F6EE;
+  --paper-2:#F1EEE1;   /* raised paper */
+  --paper-edge:#E4E0D0;
+  --charcoal:#292929;
+  --muted:#7a766a;
 
-      --serif: 'Fraunces', Georgia, serif;
-      --sans: 'Space Grotesk', sans-serif;
-      --mono: 'Space Mono', monospace;
-      --pixel: 'Silkscreen', monospace;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Space Grotesk',sans-serif;
+  --mono:'Space Mono',monospace;
+  --pixel:'Silkscreen',monospace;
 
-      --ease: cubic-bezier(.16, 1, .3, 1);
-      --hard: 5px 5px 0 var(--charcoal);
-      --hard-p: 5px 5px 0 var(--purple);
-      --hard-pk: 5px 5px 0 var(--pink);
-      --lift: 0 10px 24px rgba(41, 41, 41, .16);
-    }
+  --ease:cubic-bezier(.16,1,.3,1);
+  --hard:5px 5px 0 var(--charcoal);
+  --hard-p:5px 5px 0 var(--purple);
+  --hard-pk:5px 5px 0 var(--pink);
+  --lift:0 10px 24px rgba(41,41,41,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);background:var(--paper);color:var(--charcoal);
+  line-height:1.62;overflow-x:hidden;-webkit-font-smoothing:antialiased;
+}
+body.no-scroll{overflow:hidden;height:100vh}
+img{max-width:100%;display:block}
+button{font-family:inherit}
+::selection{background:var(--yellow);color:var(--charcoal)}
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box
-    }
+/* subtle paper grain */
+body::before{
+  content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:radial-gradient(rgba(41,41,41,.035) 1px,transparent 1px);
+  background-size:4px 4px;
+}
 
-    html {
-      scroll-behavior: smooth;
-      -webkit-text-size-adjust: 100%
-    }
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+  *{animation:none!important;transition-duration:.001ms!important}
+}
 
-    body {
-      font-family: var(--sans);
-      background: var(--paper);
-      color: var(--charcoal);
-      line-height: 1.62;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
+/* metadata label helper */
+.meta{font-family:var(--mono);font-size:.66rem;letter-spacing:.02em;color:var(--muted);text-transform:uppercase}
 
-    body.no-scroll {
-      overflow: hidden;
-      height: 100vh
-    }
-
-    img {
-      max-width: 100%;
-      display: block
-    }
-
-    button {
-      font-family: inherit
-    }
-
-    ::selection {
-      background: var(--yellow);
-      color: var(--charcoal)
-    }
-
-    /* subtle paper grain */
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      opacity: .5;
-      background-image: radial-gradient(rgba(41, 41, 41, .035) 1px, transparent 1px);
-      background-size: 4px 4px;
-    }
-
-    .reveal {
-      opacity: 0;
-      transform: translateY(22px);
-      transition: opacity .7s var(--ease), transform .7s var(--ease)
-    }
-
-    .reveal.in {
-      opacity: 1;
-      transform: none
-    }
-
-    @media(prefers-reduced-motion:reduce) {
-      .reveal {
-        opacity: 1;
-        transform: none;
-        transition: none
-      }
-
-      html {
-        scroll-behavior: auto
-      }
-
-      * {
-        animation: none !important;
-        transition-duration: .001ms !important
-      }
-    }
-
-    /* metadata label helper */
-    .meta {
-      font-family: var(--mono);
-      font-size: .66rem;
-      letter-spacing: .02em;
-      color: var(--muted);
-      text-transform: uppercase
-    }
-
-    /* ============================================================
-   COVER
+/* ============================================================
+   HERO — the shelf of books (no gate, scrolls straight in)
    ============================================================ */
-    #cover {
-      position: fixed;
-      inset: 0;
-      z-index: 1000;
-      background: var(--charcoal);
-      color: var(--paper);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 30px;
-      overflow: hidden;
-      transition: opacity .9s var(--ease), visibility .9s var(--ease);
-    }
+#hero{
+  position:relative;min-height:100vh;background:var(--paper);
+  display:flex;flex-direction:column;overflow:hidden;padding:0;
+}
+.hero-top{flex:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:20px 26px 0}
+.hero-top .meta{font-size:.62rem}
+.hero-center{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:34px 24px 10px;position:relative;z-index:4}
+.hero-eyebrow{font-family:var(--pixel);font-size:.66rem;color:var(--purple);margin-bottom:1.2rem;letter-spacing:.04em}
+.hero-title{
+  font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,9.5vw,5.6rem);
+  line-height:.94;letter-spacing:-.02em;margin-bottom:1.3rem;max-width:14ch;
+}
+.hero-title em{font-style:italic;color:var(--purple)}
+.hero-sub{font-family:var(--sans);font-size:clamp(1rem,3.4vw,1.35rem);line-height:1.5;color:var(--charcoal);font-weight:500;max-width:30ch}
+.hero-sub b{color:var(--charcoal);position:relative;white-space:nowrap;font-weight:600}
+.hero-sub b::after{content:"";position:absolute;left:0;right:0;bottom:2px;height:7px;background:var(--yellow);z-index:-1}
+.hero-name{margin-top:1.6rem;font-family:var(--mono);font-size:.72rem;letter-spacing:.05em;color:var(--muted)}
+.hero-scroll{margin-top:1.5rem;font-family:var(--pixel);font-size:.62rem;color:var(--charcoal);display:inline-flex;flex-direction:column;align-items:center;gap:8px;background:none;border:none;cursor:pointer}
+.hero-scroll .arrow{width:34px;height:34px;border:3px solid var(--charcoal);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:var(--hard-pk);animation:nudge 1.8s var(--ease) infinite}
+.hero-scroll:hover .arrow{background:var(--yellow)}
+.hero-scroll:focus-visible{outline:3px solid var(--purple);outline-offset:3px}
+@keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
-    #cover.hide {
-      opacity: 0;
-      visibility: hidden;
-      pointer-events: none
-    }
+/* the shelf */
+.shelf-stage{flex:0 0 auto;position:relative;height:min(42vh,340px);display:flex;align-items:flex-end;justify-content:center;padding:0 14px}
+.books{display:flex;align-items:flex-end;gap:6px;max-width:1080px;width:100%;justify-content:center;position:relative;z-index:2}
+.shelf-plank{position:absolute;left:0;right:0;bottom:0;height:16px;background:var(--charcoal);z-index:3}
+.shelf-plank::after{content:"";position:absolute;left:0;right:0;bottom:-9px;height:9px;background:var(--paper-edge)}
 
-    /* page-edge stack illusion on the right */
-    #cover .edges {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 14px;
-      background:
-        repeating-linear-gradient(to right, #3a3a3a 0 2px, #323232 2px 4px)
-    }
+.book{
+  flex:0 0 auto;width:44px;background:var(--bc,#666);color:#fff;cursor:pointer;position:relative;
+  border-radius:3px 3px 0 0;border-top:2px solid rgba(255,255,255,.22);
+  border-left:2px solid rgba(0,0,0,.14);
+  box-shadow:2px 0 4px rgba(41,41,41,.18);
+  display:flex;align-items:flex-end;justify-content:center;padding-bottom:16px;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease);
+  will-change:transform;
+}
+.book .spine-label{
+  writing-mode:vertical-rl;transform:rotate(180deg);font-family:var(--sans);font-weight:600;
+  font-size:.66rem;letter-spacing:.02em;white-space:nowrap;line-height:1;
+  text-transform:uppercase;opacity:.94;max-height:80%;overflow:hidden;
+}
+.book .spine-no{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--pixel);font-size:.52rem;opacity:.85}
+.book:hover,.book:focus-visible{transform:translateY(-26px) rotate(-2deg);box-shadow:6px 8px 0 rgba(41,41,41,.28);outline:none;z-index:5}
+@media(max-width:640px){
+  .shelf-stage{height:min(34vh,240px);overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch}
+  .books{justify-content:flex-start;padding:0 14px}
+  .book{width:40px}
+  .book .spine-label{font-size:.58rem}
+}
+.hero-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.58rem;color:var(--muted);z-index:4;letter-spacing:.04em}
+@media(max-width:640px){.hero-hint{left:auto;right:14px;transform:none}}
 
-    @media(max-width:640px) {
-      #cover .edges {
-        width: 8px
-      }
-    }
-
-    .cover-inner {
-      max-width: 640px;
-      position: relative;
-      z-index: 3;
-      text-align: center
-    }
-
-    .cover-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2.6rem
-    }
-
-    .cover-top .meta {
-      color: #9a9488
-    }
-
-    .bookmark {
-      position: absolute;
-      top: -30px;
-      right: 38px;
-      width: 26px;
-      height: 96px;
-      background: var(--pink);
-      clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
-      z-index: 4;
-      box-shadow: var(--lift)
-    }
-
-    @media(max-width:640px) {
-      .bookmark {
-        right: 20px;
-        width: 20px;
-        height: 74px
-      }
-    }
-
-    .cover-title {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: clamp(2rem, 8vw, 3.5rem);
-      line-height: 1.04;
-      letter-spacing: -.01em;
-      margin-bottom: 1.8rem;
-    }
-
-    .cover-sub {
-      font-family: var(--sans);
-      font-size: clamp(.95rem, 3.4vw, 1.15rem);
-      line-height: 1.7;
-      color: #c9c4b8;
-      font-weight: 400
-    }
-
-    .cover-sub b {
-      color: var(--yellow);
-      font-weight: 600
-    }
-
-    .cover-name {
-      margin-top: 2.2rem;
-      font-family: var(--mono);
-      font-size: .8rem;
-      letter-spacing: .04em;
-      color: var(--paper)
-    }
-
-    .cover-name span {
-      color: var(--muted);
-      display: block;
-      margin-top: 3px;
-      font-size: .7rem
-    }
-
-    .start-btn {
-      margin-top: 2.6rem;
-      font-family: var(--pixel);
-      font-size: .78rem;
-      background: var(--yellow);
-      color: var(--charcoal);
-      border: 3px solid #000;
-      padding: 17px 28px;
-      cursor: pointer;
-      box-shadow: var(--hard-pk);
-      transition: transform .13s var(--ease), box-shadow .13s var(--ease);
-    }
-
-    .start-btn:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 7px 7px 0 var(--pink)
-    }
-
-    .start-btn:active {
-      transform: translate(3px, 3px);
-      box-shadow: 2px 2px 0 var(--pink)
-    }
-
-    .start-btn:focus-visible {
-      outline: 3px solid var(--paper);
-      outline-offset: 3px
-    }
-
-    .cover-foot {
-      margin-top: 2.4rem
-    }
-
-    /* small archival markings */
-    .stamp {
-      position: absolute;
-      font-family: var(--mono);
-      font-size: .6rem;
-      color: var(--pink);
-      border: 2px solid var(--pink);
-      padding: 6px 9px;
-      transform: rotate(-11deg);
-      opacity: .85;
-      letter-spacing: .05em;
-    }
-
-    .stamp.s1 {
-      top: 12%;
-      left: 9%
-    }
-
-    .stamp.s2 {
-      bottom: 13%;
-      right: 12%;
-      color: var(--yellow);
-      border-color: var(--yellow);
-      transform: rotate(8deg)
-    }
-
-    @media(max-width:680px) {
-      .stamp {
-        display: none
-      }
-    }
-
-    /* ============================================================
+/* ============================================================
    TOP BAR + PROGRESS
    ============================================================ */
-    #progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 4px;
-      background: var(--pink);
-      z-index: 700;
-      width: 0;
-      transition: width .1s linear
-    }
+#progress{position:fixed;top:0;left:0;height:4px;background:var(--pink);z-index:700;width:0;transition:width .1s linear}
+#filetag{
+  position:fixed;top:14px;left:16px;z-index:600;font-family:var(--mono);font-size:.62rem;
+  background:var(--charcoal);color:var(--paper);padding:7px 11px;
+  opacity:0;transition:opacity .5s var(--ease);letter-spacing:.03em;
+}
+#filetag.show{opacity:1}
+#filetag b{color:var(--yellow)}
 
-    #filetag {
-      position: fixed;
-      top: 14px;
-      left: 16px;
-      z-index: 600;
-      font-family: var(--mono);
-      font-size: .62rem;
-      background: var(--charcoal);
-      color: var(--paper);
-      padding: 7px 11px;
-      opacity: 0;
-      transition: opacity .5s var(--ease);
-      letter-spacing: .03em;
-    }
-
-    #filetag.show {
-      opacity: 1
-    }
-
-    #filetag b {
-      color: var(--yellow)
-    }
-
-    /* ============================================================
+/* ============================================================
    BOOK-SPINE SHELF (desktop rail)
    ============================================================ */
-    #shelf {
-      position: fixed;
-      top: 50%;
-      right: 0;
-      transform: translateY(-50%);
-      z-index: 600;
-      display: flex;
-      flex-direction: column;
-      gap: 0;
-      opacity: 0;
-      transition: opacity .5s var(--ease);
-    }
+#shelf{
+  position:fixed;top:50%;right:0;transform:translateY(-50%);z-index:600;
+  display:flex;flex-direction:column;gap:0;opacity:0;transition:opacity .5s var(--ease);
+}
+#shelf.show{opacity:1}
+.spine{
+  display:flex;align-items:center;gap:10px;cursor:pointer;border:none;
+  background:var(--spinec,#666);color:#fff;
+  width:52px;height:64px;padding:0 0 0 10px;position:relative;
+  border-left:4px solid rgba(0,0,0,.25);border-top:1px solid rgba(255,255,255,.15);
+  transition:width .28s var(--ease),transform .28s var(--ease),box-shadow .28s var(--ease);
+  overflow:hidden;box-shadow:-2px 2px 0 rgba(41,41,41,.25);
+}
+.spine .sn{font-family:var(--pixel);font-size:.62rem;flex-shrink:0}
+.spine .st{font-family:var(--sans);font-weight:600;font-size:.72rem;white-space:nowrap;opacity:0;transition:opacity .2s var(--ease) .05s;text-align:left;line-height:1.1}
+.spine:hover,.spine:focus-visible{width:230px;transform:translateX(-6px);box-shadow:-6px 6px 0 rgba(41,41,41,.3);outline:none;z-index:2}
+.spine:hover .st,.spine:focus-visible .st{opacity:1}
+.spine.active{width:210px;transform:translateX(-4px)}
+.spine.active .st{opacity:1}
+.spine.active::after{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--yellow)}
+@media(max-width:900px){#shelf{display:none}}
 
-    #shelf.show {
-      opacity: 1
-    }
+/* mobile: horizontal spine strip */
+#mshelf{
+  position:fixed;bottom:0;left:0;right:0;z-index:600;display:none;gap:6px;
+  padding:10px 12px;background:linear-gradient(to top,var(--paper) 70%,transparent);
+  overflow-x:auto;-webkit-overflow-scrolling:touch;transform:translateY(120%);transition:transform .4s var(--ease);
+}
+#mshelf.show{transform:none}
+#mshelf::-webkit-scrollbar{display:none}
+.mspine{flex:0 0 auto;font-family:var(--pixel);font-size:.6rem;color:#fff;background:var(--spinec,#666);
+  padding:11px 13px;border:2px solid #000;box-shadow:3px 3px 0 var(--charcoal);white-space:nowrap;cursor:pointer;display:flex;gap:7px;align-items:center}
+.mspine.active{outline:3px solid var(--yellow);outline-offset:-3px}
+@media(max-width:900px){#mshelf{display:flex}}
 
-    .spine {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      cursor: pointer;
-      border: none;
-      background: var(--spinec, #666);
-      color: #fff;
-      width: 52px;
-      height: 64px;
-      padding: 0 0 0 10px;
-      position: relative;
-      border-left: 4px solid rgba(0, 0, 0, .25);
-      border-top: 1px solid rgba(255, 255, 255, .15);
-      transition: width .28s var(--ease), transform .28s var(--ease), box-shadow .28s var(--ease);
-      overflow: hidden;
-      box-shadow: -2px 2px 0 rgba(41, 41, 41, .25);
-    }
-
-    .spine .sn {
-      font-family: var(--pixel);
-      font-size: .62rem;
-      flex-shrink: 0
-    }
-
-    .spine .st {
-      font-family: var(--sans);
-      font-weight: 600;
-      font-size: .72rem;
-      white-space: nowrap;
-      opacity: 0;
-      transition: opacity .2s var(--ease) .05s;
-      text-align: left;
-      line-height: 1.1
-    }
-
-    .spine:hover,
-    .spine:focus-visible {
-      width: 230px;
-      transform: translateX(-6px);
-      box-shadow: -6px 6px 0 rgba(41, 41, 41, .3);
-      outline: none;
-      z-index: 2
-    }
-
-    .spine:hover .st,
-    .spine:focus-visible .st {
-      opacity: 1
-    }
-
-    .spine.active {
-      width: 210px;
-      transform: translateX(-4px)
-    }
-
-    .spine.active .st {
-      opacity: 1
-    }
-
-    .spine.active::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background: var(--yellow)
-    }
-
-    @media(max-width:900px) {
-      #shelf {
-        display: none
-      }
-    }
-
-    /* mobile: horizontal spine strip */
-    #mshelf {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 600;
-      display: none;
-      gap: 6px;
-      padding: 10px 12px;
-      background: linear-gradient(to top, var(--paper) 70%, transparent);
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
-      transform: translateY(120%);
-      transition: transform .4s var(--ease);
-    }
-
-    #mshelf.show {
-      transform: none
-    }
-
-    #mshelf::-webkit-scrollbar {
-      display: none
-    }
-
-    .mspine {
-      flex: 0 0 auto;
-      font-family: var(--pixel);
-      font-size: .6rem;
-      color: #fff;
-      background: var(--spinec, #666);
-      padding: 11px 13px;
-      border: 2px solid #000;
-      box-shadow: 3px 3px 0 var(--charcoal);
-      white-space: nowrap;
-      cursor: pointer;
-      display: flex;
-      gap: 7px;
-      align-items: center
-    }
-
-    .mspine.active {
-      outline: 3px solid var(--yellow);
-      outline-offset: -3px
-    }
-
-    @media(max-width:900px) {
-      #mshelf {
-        display: flex
-      }
-    }
-
-    /* ============================================================
+/* ============================================================
    STORY / CHAPTERS
    ============================================================ */
-    #story {
-      opacity: 0;
-      transition: opacity .8s var(--ease)
-    }
+#story{opacity:0;transition:opacity .8s var(--ease)}
+#story.show{opacity:1}
+/* gate: story is sealed until a book is pulled from the hero */
+#story.sealed{max-height:0;overflow:hidden;opacity:0;pointer-events:none}
+#finale.sealed,#endmark.sealed,.dev-toggle.sealed{display:none}
 
-    #story.show {
-      opacity: 1
-    }
+/* a book being pulled off the shelf */
+.book.pulling{transform:translateY(-58px) rotate(-4deg) scale(1.04);box-shadow:8px 12px 0 rgba(41,41,41,.3);z-index:9}
+.book.pulling::before,
+.book.pulling::after{
+  content:"";position:absolute;top:10px;bottom:10px;width:26px;
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(238,232,214,.92));
+  border:2px solid rgba(41,41,41,.18);box-shadow:inset 0 0 0 1px rgba(255,255,255,.45);
+  opacity:0;transition:opacity .25s ease,transform .45s var(--ease);
+}
+.book.pulling::before{
+  left:-20px;border-radius:4px 0 0 4px;transform-origin:right center;
+  transform:perspective(900px) rotateY(58deg) translateX(-8px);
+}
+.book.pulling::after{
+  right:-20px;border-radius:0 4px 4px 0;transform-origin:left center;
+  transform:perspective(900px) rotateY(-58deg) translateX(8px);
+}
+.book.pulling::before,
+.book.pulling::after{opacity:1}
+#hero.book-open .books{transform:translateY(6px) scale(1.02);transition:transform .5s var(--ease)}
+#hero.book-open .book:not(.pulling){opacity:.38;filter:saturate(.8)}
+#hero.book-open .book:not(.pulling):hover{transform:translateY(-10px)}
+/* the hero peeling away after a pull */
+#hero.opening{transition:opacity .6s var(--ease),transform .6s var(--ease);opacity:0;transform:translateY(-28px)}
+.chapter{min-height:100vh;padding:120px 24px 140px;position:relative;overflow:hidden}
+.ch-wrap{max-width:1020px;margin:0 auto;width:100%;position:relative;z-index:3}
+@media(max-width:640px){.chapter{padding:96px 18px 130px}}
 
-    .chapter {
-      min-height: 100vh;
-      padding: 120px 24px 140px;
-      position: relative;
-      overflow: hidden
-    }
+/* chapter header block */
+.ch-head{display:flex;align-items:flex-start;gap:20px;margin-bottom:2rem}
+.ch-bignum{
+  font-family:var(--serif);font-weight:400;font-size:clamp(3.4rem,13vw,7rem);line-height:.8;
+  color:var(--spinec,var(--purple));flex-shrink:0;
+}
+.ch-headmeta{padding-top:6px}
+.ch-headmeta .meta{display:block;margin-bottom:6px}
+.ch-title{font-family:var(--sans);font-weight:700;font-size:clamp(1.5rem,5vw,2.7rem);line-height:1.05;letter-spacing:-.02em;max-width:20ch}
 
-    .ch-wrap {
-      max-width: 1020px;
-      margin: 0 auto;
-      width: 100%;
-      position: relative;
-      z-index: 3
-    }
+.ch-body{max-width:60ch;font-size:clamp(1.02rem,3.5vw,1.16rem);color:#3a382f}
+.ch-body p{margin-bottom:1.05rem}
+.ch-body p.lead{font-size:1.18em;font-weight:500;color:var(--charcoal)}
+.ch-body .hl{background:linear-gradient(transparent 55%,var(--yellow) 55%);padding:0 3px;font-weight:600}
 
-    @media(max-width:640px) {
-      .chapter {
-        padding: 96px 18px 130px
-      }
-    }
+/* big editorial pull-quote (serif) */
+.pull{
+  font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,4.6vw,2.4rem);
+  line-height:1.18;letter-spacing:-.01em;color:var(--charcoal);margin:2rem 0;max-width:22ch;position:relative;
+}
+.pull::before{content:"";position:absolute;left:-18px;top:6px;bottom:6px;width:5px;background:var(--pink)}
+@media(max-width:640px){.pull::before{left:-12px;width:4px}}
 
-    /* chapter header block */
-    .ch-head {
-      display: flex;
-      align-items: flex-start;
-      gap: 20px;
-      margin-bottom: 2rem
-    }
+/* ---------- ARCHIVAL ARTIFACT (image placeholder as filed document) ---------- */
+.artifact{
+  background:var(--white);padding:12px 12px 14px;margin:1.8rem 0;position:relative;
+  box-shadow:var(--hard);border:1px solid var(--paper-edge);transform:rotate(-1deg);
+  max-width:520px;
+}
+.artifact:nth-of-type(even){transform:rotate(1deg);box-shadow:var(--hard-p)}
+.artifact::before{
+  content:attr(data-id);position:absolute;top:-12px;left:12px;font-family:var(--mono);font-size:.6rem;
+  background:var(--charcoal);color:var(--yellow);padding:5px 9px;letter-spacing:.04em;z-index:2;
+}
+/* binder holes */
+.artifact::after{content:"";position:absolute;left:-7px;top:22px;width:9px;height:9px;border-radius:50%;
+  background:var(--paper);box-shadow:0 26px 0 var(--paper),0 52px 0 var(--paper);border:1px solid var(--paper-edge)}
+.art-inner{background:var(--paper-2);border:2px dashed #cfcbba;padding:28px 16px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:168px;justify-content:center}
+.art-inner .icon{font-size:1.7rem}
+.art-inner .what{font-weight:600;font-size:.96rem;color:var(--charcoal);font-family:var(--sans)}
+.art-inner .why{font-size:.8rem;color:var(--muted);max-width:38ch}
+.art-cap{display:flex;justify-content:space-between;margin-top:10px;padding:0 2px}
+.art-cap .meta{font-size:.58rem}
+.artifact.tall .art-inner{min-height:280px}
+.artifact.wide{max-width:640px}
+.art-inner img{display:block;width:100%;height:auto;border:2px solid var(--paper-edge);background:var(--paper-2)}
+.art-gallery{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
+.art-gallery img{flex:0 0 auto;max-height:260px;width:auto;scroll-snap-align:start;border:2px solid var(--paper-edge);background:var(--paper-2)}
+.artifact.tall .art-gallery img{max-height:300px}
 
-    .ch-bignum {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: clamp(3.4rem, 13vw, 7rem);
-      line-height: .8;
-      color: var(--spinec, var(--purple));
-      flex-shrink: 0;
-    }
+/* annotation sticky */
+.annot{
+  display:inline-block;font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--purple-ink);
+  background:var(--yellow);padding:8px 14px;transform:rotate(-2deg);box-shadow:3px 3px 0 rgba(41,41,41,.2);
+  margin:1rem 0;
+}
 
-    .ch-headmeta {
-      padding-top: 6px
-    }
-
-    .ch-headmeta .meta {
-      display: block;
-      margin-bottom: 6px
-    }
-
-    .ch-title {
-      font-family: var(--sans);
-      font-weight: 700;
-      font-size: clamp(1.5rem, 5vw, 2.7rem);
-      line-height: 1.05;
-      letter-spacing: -.02em;
-      max-width: 20ch
-    }
-
-    .ch-body {
-      max-width: 60ch;
-      font-size: clamp(1.02rem, 3.5vw, 1.16rem);
-      color: #3a382f
-    }
-
-    .ch-body p {
-      margin-bottom: 1.05rem
-    }
-
-    .ch-body p.lead {
-      font-size: 1.18em;
-      font-weight: 500;
-      color: var(--charcoal)
-    }
-
-    .ch-body .hl {
-      background: linear-gradient(transparent 55%, var(--yellow) 55%);
-      padding: 0 3px;
-      font-weight: 600
-    }
-
-    /* big editorial pull-quote (serif) */
-    .pull {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: clamp(1.5rem, 4.6vw, 2.4rem);
-      line-height: 1.18;
-      letter-spacing: -.01em;
-      color: var(--charcoal);
-      margin: 2rem 0;
-      max-width: 22ch;
-      position: relative;
-    }
-
-    .pull::before {
-      content: "";
-      position: absolute;
-      left: -18px;
-      top: 6px;
-      bottom: 6px;
-      width: 5px;
-      background: var(--pink)
-    }
-
-    @media(max-width:640px) {
-      .pull::before {
-        left: -12px;
-        width: 4px
-      }
-    }
-
-    /* ---------- ARCHIVAL ARTIFACT (image placeholder as filed document) ---------- */
-    .artifact {
-      background: var(--white);
-      padding: 12px 12px 14px;
-      margin: 1.8rem 0;
-      position: relative;
-      box-shadow: var(--hard);
-      border: 1px solid var(--paper-edge);
-      transform: rotate(-1deg);
-      max-width: 520px;
-    }
-
-    .artifact:nth-of-type(even) {
-      transform: rotate(1deg);
-      box-shadow: var(--hard-p)
-    }
-
-    .artifact::before {
-      content: attr(data-id);
-      position: absolute;
-      top: -12px;
-      left: 12px;
-      font-family: var(--mono);
-      font-size: .6rem;
-      background: var(--charcoal);
-      color: var(--yellow);
-      padding: 5px 9px;
-      letter-spacing: .04em;
-      z-index: 2;
-    }
-
-    /* binder holes */
-    .artifact::after {
-      content: "";
-      position: absolute;
-      left: -7px;
-      top: 22px;
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: var(--paper);
-      box-shadow: 0 26px 0 var(--paper), 0 52px 0 var(--paper);
-      border: 1px solid var(--paper-edge)
-    }
-
-    .art-inner {
-      background: var(--paper-2);
-      border: 2px dashed #cfcbba;
-      padding: 28px 16px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      min-height: 168px;
-      justify-content: center
-    }
-
-    .art-inner .icon {
-      font-size: 1.7rem
-    }
-
-    .art-inner .what {
-      font-weight: 600;
-      font-size: .96rem;
-      color: var(--charcoal);
-      font-family: var(--sans)
-    }
-
-    .art-inner .why {
-      font-size: .8rem;
-      color: var(--muted);
-      max-width: 38ch
-    }
-
-    .art-cap {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 10px;
-      padding: 0 2px
-    }
-
-    .art-cap .meta {
-      font-size: .58rem
-    }
-
-    .artifact.tall .art-inner {
-      min-height: 280px
-    }
-
-    .artifact.wide {
-      max-width: 640px
-    }
-
-    /* annotation sticky */
-    .annot {
-      display: inline-block;
-      font-family: var(--serif);
-      font-style: italic;
-      font-size: 1rem;
-      color: var(--purple-ink);
-      background: var(--yellow);
-      padding: 8px 14px;
-      transform: rotate(-2deg);
-      box-shadow: 3px 3px 0 rgba(41, 41, 41, .2);
-      margin: 1rem 0;
-    }
-
-    /* ============================================================
+/* ============================================================
    TIMELINE (archive markers)
    ============================================================ */
-    .timeline {
-      margin: 2.6rem 0 1rem;
-      border-top: 2px solid var(--charcoal);
-      padding-top: 1.4rem
-    }
+.timeline{margin:2.6rem 0 1rem;border-top:2px solid var(--charcoal);padding-top:1.4rem}
+.tl-item{display:flex;gap:18px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--paper-edge)}
+.tl-year{font-family:var(--mono);font-weight:700;font-size:.82rem;min-width:64px;color:var(--purple)}
+.tl-item.hot .tl-year{color:var(--pink)}
+.tl-item.now .tl-year{color:var(--charcoal);background:var(--yellow);padding:2px 6px}
+.tl-text b{font-family:var(--sans);font-weight:600;font-size:1rem;display:block}
+.tl-text span{font-size:.86rem;color:var(--muted)}
 
-    .tl-item {
-      display: flex;
-      gap: 18px;
-      align-items: baseline;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--paper-edge)
-    }
-
-    .tl-year {
-      font-family: var(--mono);
-      font-weight: 700;
-      font-size: .82rem;
-      min-width: 64px;
-      color: var(--purple)
-    }
-
-    .tl-item.hot .tl-year {
-      color: var(--pink)
-    }
-
-    .tl-item.now .tl-year {
-      color: var(--charcoal);
-      background: var(--yellow);
-      padding: 2px 6px
-    }
-
-    .tl-text b {
-      font-family: var(--sans);
-      font-weight: 600;
-      font-size: 1rem;
-      display: block
-    }
-
-    .tl-text span {
-      font-size: .86rem;
-      color: var(--muted)
-    }
-
-    /* ============================================================
+/* ============================================================
    TEACHING REVEAL (ch3) — pull the document forward
    ============================================================ */
-    .tcard {
-      position: relative;
-      margin: 2rem 0;
-      max-width: 520px;
-      cursor: pointer;
-      min-height: 150px
-    }
+.tcard{position:relative;margin:2rem 0;max-width:520px;cursor:pointer;min-height:150px}
+.tcard .sheet{
+  position:absolute;inset:0;background:var(--white);border:1px solid var(--paper-edge);
+  box-shadow:var(--hard);padding:26px 22px;display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:1.3rem;text-align:center;transition:.5s var(--ease);
+}
+.tcard .s-front{z-index:3;transform:rotate(-1.5deg)}
+.tcard .s-back{z-index:2;transform:rotate(2deg);color:var(--purple-ink)}
+.tcard.opened .s-front{transform:translate(-40px,-16px) rotate(-7deg);opacity:0}
+.tcard.opened .s-back{transform:rotate(-1deg)}
+.tcard .hintlabel{position:absolute;bottom:-26px;left:2px;font-family:var(--mono);font-size:.58rem;color:var(--muted)}
 
-    .tcard .sheet {
-      position: absolute;
-      inset: 0;
-      background: var(--white);
-      border: 1px solid var(--paper-edge);
-      box-shadow: var(--hard);
-      padding: 26px 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-family: var(--serif);
-      font-size: 1.3rem;
-      text-align: center;
-      transition: .5s var(--ease);
-    }
-
-    .tcard .s-front {
-      z-index: 3;
-      transform: rotate(-1.5deg)
-    }
-
-    .tcard .s-back {
-      z-index: 2;
-      transform: rotate(2deg);
-      color: var(--purple-ink)
-    }
-
-    .tcard.opened .s-front {
-      transform: translate(-40px, -16px) rotate(-7deg);
-      opacity: 0
-    }
-
-    .tcard.opened .s-back {
-      transform: rotate(-1deg)
-    }
-
-    .tcard .hintlabel {
-      position: absolute;
-      bottom: -26px;
-      left: 2px;
-      font-family: var(--mono);
-      font-size: .58rem;
-      color: var(--muted)
-    }
-
-    /* ============================================================
+/* ============================================================
    PIPELINE (ch4)
    ============================================================ */
-    .pipeline {
-      margin: 2.2rem 0
-    }
+.pipeline{margin:2.2rem 0}
+.pipe-steps{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.3rem;align-items:center}
+.pipe-btn{font-family:var(--pixel);font-size:.62rem;border:3px solid #000;background:var(--white);color:var(--charcoal);padding:11px 12px;cursor:pointer;box-shadow:3px 3px 0 var(--charcoal);transition:.12s var(--ease)}
+.pipe-btn:hover{background:var(--yellow);transform:translate(-1px,-1px)}
+.pipe-btn.active{background:var(--purple);color:#fff;box-shadow:3px 3px 0 var(--pink)}
+.pipe-btn:focus-visible{outline:2px solid var(--pink);outline-offset:2px}
+.pipe-arrow{font-family:var(--mono);color:#bdb9aa;font-size:.7rem}
+.pipe-panel{background:var(--white);border:1px solid var(--paper-edge);box-shadow:var(--hard-p);padding:22px;min-height:120px}
+.pipe-panel .tag{font-family:var(--mono);font-size:.62rem;color:var(--pink);display:block;margin-bottom:9px;letter-spacing:.04em}
+.pipe-panel h4{font-family:var(--sans);font-weight:700;font-size:1.12rem;margin-bottom:5px}
+.pipe-panel p{color:#3a382f;font-size:.97rem}
+.digital-shift{font-family:var(--mono);font-size:.62rem;color:var(--muted);text-align:center;margin:1.2rem 0 0;letter-spacing:.06em}
 
-    .pipe-steps {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 1.3rem;
-      align-items: center
-    }
-
-    .pipe-btn {
-      font-family: var(--pixel);
-      font-size: .62rem;
-      border: 3px solid #000;
-      background: var(--white);
-      color: var(--charcoal);
-      padding: 11px 12px;
-      cursor: pointer;
-      box-shadow: 3px 3px 0 var(--charcoal);
-      transition: .12s var(--ease)
-    }
-
-    .pipe-btn:hover {
-      background: var(--yellow);
-      transform: translate(-1px, -1px)
-    }
-
-    .pipe-btn.active {
-      background: var(--purple);
-      color: #fff;
-      box-shadow: 3px 3px 0 var(--pink)
-    }
-
-    .pipe-btn:focus-visible {
-      outline: 2px solid var(--pink);
-      outline-offset: 2px
-    }
-
-    .pipe-arrow {
-      font-family: var(--mono);
-      color: #bdb9aa;
-      font-size: .7rem
-    }
-
-    .pipe-panel {
-      background: var(--white);
-      border: 1px solid var(--paper-edge);
-      box-shadow: var(--hard-p);
-      padding: 22px;
-      min-height: 120px
-    }
-
-    .pipe-panel .tag {
-      font-family: var(--mono);
-      font-size: .62rem;
-      color: var(--pink);
-      display: block;
-      margin-bottom: 9px;
-      letter-spacing: .04em
-    }
-
-    .pipe-panel h4 {
-      font-family: var(--sans);
-      font-weight: 700;
-      font-size: 1.12rem;
-      margin-bottom: 5px
-    }
-
-    .pipe-panel p {
-      color: #3a382f;
-      font-size: .97rem
-    }
-
-    .digital-shift {
-      font-family: var(--mono);
-      font-size: .62rem;
-      color: var(--muted);
-      text-align: center;
-      margin: 1.2rem 0 0;
-      letter-spacing: .06em
-    }
-
-    /* ============================================================
+/* ============================================================
    HOVER WORDS (ch6)
    ============================================================ */
-    .reveal-strip {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin: 1.6rem 0
-    }
+.reveal-strip{display:flex;flex-wrap:wrap;gap:10px;margin:1.6rem 0}
+.rword{font-family:var(--pixel);font-size:.66rem;border:3px solid #000;background:var(--white);color:var(--charcoal);padding:12px 15px;cursor:pointer;box-shadow:3px 3px 0 var(--charcoal);transition:.12s var(--ease)}
+.rword:hover,.rword:focus-visible{transform:translate(-2px,-2px);background:var(--yellow);outline:none}
+.rword.on{background:var(--pink);color:#fff}
+.rword-panel{background:var(--white);border:1px solid var(--paper-edge);box-shadow:var(--hard-pk);margin-top:1.3rem;padding:22px;display:none}
+.rword-panel.active{display:block;animation:pop .3s var(--ease)}
+@keyframes pop{from{opacity:0;transform:scale(.98)}to{opacity:1;transform:none}}
+.rword-panel .tag{font-family:var(--mono);font-size:.6rem;color:var(--pink);margin-bottom:9px;display:block;letter-spacing:.04em}
 
-    .rword {
-      font-family: var(--pixel);
-      font-size: .66rem;
-      border: 3px solid #000;
-      background: var(--white);
-      color: var(--charcoal);
-      padding: 12px 15px;
-      cursor: pointer;
-      box-shadow: 3px 3px 0 var(--charcoal);
-      transition: .12s var(--ease)
-    }
+/* MINDWELL */
+.mw{margin:2.2rem 0}
+.mw-toggle{display:flex;border:3px solid #000;width:fit-content;box-shadow:var(--hard)}
+.mw-tab{font-family:var(--pixel);font-size:.64rem;background:var(--white);color:var(--charcoal);border:none;padding:13px 20px;cursor:pointer;transition:.15s var(--ease)}
+.mw-tab+.mw-tab{border-left:3px solid #000}
+.mw-tab.active{background:var(--pink);color:#fff}
+.mw-tab:focus-visible{outline:2px solid var(--purple);outline-offset:-4px}
+.mw-flow{display:none;margin-top:1.3rem}
+.mw-flow.active{display:block;animation:pop .3s var(--ease)}
+.mw-stage{border-left:4px solid var(--purple);padding:2px 0 2px 15px;margin-bottom:11px}
+.mw-stage .s-label{font-family:var(--mono);font-size:.58rem;color:var(--pink);display:block;margin-bottom:2px;letter-spacing:.04em}
+.mw-stage p{font-size:.96rem}
+.mw-lesson{background:var(--charcoal);color:#fff;padding:18px 20px;margin-top:1.3rem;font-family:var(--serif);font-size:1.14rem;box-shadow:var(--hard-pk)}
 
-    .rword:hover,
-    .rword:focus-visible {
-      transform: translate(-2px, -2px);
-      background: var(--yellow);
-      outline: none
-    }
+/* SPLIT */
+.split{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin:2.2rem 0}
+.split-col{padding:22px 20px;background:var(--white);border:1px solid var(--paper-edge);box-shadow:var(--hard)}
+.split-col h4{font-family:var(--pixel);font-size:.78rem;margin-bottom:14px}
+.split-col.design h4{color:var(--purple)}
+.split-col.build h4{color:var(--pink)}
+.split-col ul{list-style:none}
+.split-col li{padding:6px 0;border-bottom:1px dashed #ded9c8;font-size:.9rem;display:flex;gap:8px;align-items:center}
+.split-col li::before{content:"▸";color:var(--pink);font-family:var(--mono);font-size:.7rem}
+.split-mid{font-family:var(--pixel);font-size:.8rem;color:var(--charcoal);text-align:center}
+.split-plus{grid-column:1/-1;background:var(--yellow);text-align:center;padding:16px;font-family:var(--sans);font-weight:700;font-size:1.25rem;box-shadow:var(--hard);border:3px solid #000}
+@media(max-width:600px){.split{grid-template-columns:1fr}.split-mid{padding:4px}}
 
-    .rword.on {
-      background: var(--pink);
-      color: #fff
-    }
+/* RABBIT HOLE (ch5) */
+.rabbit{margin:2.2rem 0;display:flex;flex-direction:column;gap:6px}
+.rabbit-step{display:flex;align-items:center;gap:12px;padding:13px 16px;background:var(--white);border:1px solid var(--paper-edge);box-shadow:var(--hard);font-family:var(--sans);font-weight:600;transition:.4s var(--ease)}
+.rabbit-step .rb-num{font-family:var(--mono);font-size:.62rem;color:var(--pink);min-width:22px}
+.rabbit-step:nth-child(2){margin-left:22px}
+.rabbit-step:nth-child(3){margin-left:44px}
+.rabbit-step:nth-child(4){margin-left:66px}
+.rabbit-step:nth-child(5){margin-left:88px}
+.rabbit-step:nth-child(6){margin-left:110px;background:var(--purple);color:#fff}
+@media(max-width:600px){.rabbit-step{margin-left:0!important;font-size:.94rem}}
 
-    .rword-panel {
-      background: var(--white);
-      border: 1px solid var(--paper-edge);
-      box-shadow: var(--hard-pk);
-      margin-top: 1.3rem;
-      padding: 22px;
-      display: none
-    }
+.founders{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:1.6rem 0;max-width:640px}
+@media(max-width:560px){.founders{grid-template-columns:1fr}}
+.founders .artifact{transform:none;margin:0;max-width:none}
+.founders .artifact:nth-of-type(even){transform:none}
 
-    .rword-panel.active {
-      display: block;
-      animation: pop .3s var(--ease)
-    }
+.facts{display:flex;flex-wrap:wrap;gap:0;margin:2rem 0;border:3px solid #000;box-shadow:var(--hard);max-width:640px}
+.fact{padding:16px 18px;flex:1;min-width:110px;background:var(--white);border-right:3px solid #000}
+.fact:last-child{border-right:none}
+.fact b{font-family:var(--serif);font-size:1.7rem;display:block;line-height:1;color:var(--purple)}
+.fact span{font-size:.62rem;font-family:var(--mono);color:var(--muted);margin-top:6px;display:block;letter-spacing:.03em}
+@media(max-width:560px){.fact{border-right:none;border-bottom:3px solid #000;flex-basis:40%}}
 
-    @keyframes pop {
-      from {
-        opacity: 0;
-        transform: scale(.98)
-      }
+.imagi-note{background:var(--white);border:1px solid var(--paper-edge);border-left:5px solid var(--purple);padding:20px 22px;box-shadow:var(--hard);margin:1.5rem 0;font-size:1.02rem;max-width:600px}
+.imagi-note .label{display:block;font-family:var(--mono);font-size:.6rem;color:var(--pink);margin-bottom:8px;letter-spacing:.05em}
+.imagi-note a{color:var(--purple);text-decoration:underline;font-size:.76rem;font-family:var(--mono)}
 
-      to {
-        opacity: 1;
-        transform: none
-      }
-    }
-
-    .rword-panel .tag {
-      font-family: var(--mono);
-      font-size: .6rem;
-      color: var(--pink);
-      margin-bottom: 9px;
-      display: block;
-      letter-spacing: .04em
-    }
-
-    /* MINDWELL */
-    .mw {
-      margin: 2.2rem 0
-    }
-
-    .mw-toggle {
-      display: flex;
-      border: 3px solid #000;
-      width: fit-content;
-      box-shadow: var(--hard)
-    }
-
-    .mw-tab {
-      font-family: var(--pixel);
-      font-size: .64rem;
-      background: var(--white);
-      color: var(--charcoal);
-      border: none;
-      padding: 13px 20px;
-      cursor: pointer;
-      transition: .15s var(--ease)
-    }
-
-    .mw-tab+.mw-tab {
-      border-left: 3px solid #000
-    }
-
-    .mw-tab.active {
-      background: var(--pink);
-      color: #fff
-    }
-
-    .mw-tab:focus-visible {
-      outline: 2px solid var(--purple);
-      outline-offset: -4px
-    }
-
-    .mw-flow {
-      display: none;
-      margin-top: 1.3rem
-    }
-
-    .mw-flow.active {
-      display: block;
-      animation: pop .3s var(--ease)
-    }
-
-    .mw-stage {
-      border-left: 4px solid var(--purple);
-      padding: 2px 0 2px 15px;
-      margin-bottom: 11px
-    }
-
-    .mw-stage .s-label {
-      font-family: var(--mono);
-      font-size: .58rem;
-      color: var(--pink);
-      display: block;
-      margin-bottom: 2px;
-      letter-spacing: .04em
-    }
-
-    .mw-stage p {
-      font-size: .96rem
-    }
-
-    .mw-lesson {
-      background: var(--charcoal);
-      color: #fff;
-      padding: 18px 20px;
-      margin-top: 1.3rem;
-      font-family: var(--serif);
-      font-size: 1.14rem;
-      box-shadow: var(--hard-pk)
-    }
-
-    /* SPLIT */
-    .split {
-      display: grid;
-      grid-template-columns: 1fr auto 1fr;
-      align-items: center;
-      gap: 12px;
-      margin: 2.2rem 0
-    }
-
-    .split-col {
-      padding: 22px 20px;
-      background: var(--white);
-      border: 1px solid var(--paper-edge);
-      box-shadow: var(--hard)
-    }
-
-    .split-col h4 {
-      font-family: var(--pixel);
-      font-size: .78rem;
-      margin-bottom: 14px
-    }
-
-    .split-col.design h4 {
-      color: var(--purple)
-    }
-
-    .split-col.build h4 {
-      color: var(--pink)
-    }
-
-    .split-col ul {
-      list-style: none
-    }
-
-    .split-col li {
-      padding: 6px 0;
-      border-bottom: 1px dashed #ded9c8;
-      font-size: .9rem;
-      display: flex;
-      gap: 8px;
-      align-items: center
-    }
-
-    .split-col li::before {
-      content: "▸";
-      color: var(--pink);
-      font-family: var(--mono);
-      font-size: .7rem
-    }
-
-    .split-mid {
-      font-family: var(--pixel);
-      font-size: .8rem;
-      color: var(--charcoal);
-      text-align: center
-    }
-
-    .split-plus {
-      grid-column: 1/-1;
-      background: var(--yellow);
-      text-align: center;
-      padding: 16px;
-      font-family: var(--sans);
-      font-weight: 700;
-      font-size: 1.25rem;
-      box-shadow: var(--hard);
-      border: 3px solid #000
-    }
-
-    @media(max-width:600px) {
-      .split {
-        grid-template-columns: 1fr
-      }
-
-      .split-mid {
-        padding: 4px
-      }
-    }
-
-    /* RABBIT HOLE (ch5) */
-    .rabbit {
-      margin: 2.2rem 0;
-      display: flex;
-      flex-direction: column;
-      gap: 6px
-    }
-
-    .rabbit-step {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 13px 16px;
-      background: var(--white);
-      border: 1px solid var(--paper-edge);
-      box-shadow: var(--hard);
-      font-family: var(--sans);
-      font-weight: 600;
-      transition: .4s var(--ease)
-    }
-
-    .rabbit-step .rb-num {
-      font-family: var(--mono);
-      font-size: .62rem;
-      color: var(--pink);
-      min-width: 22px
-    }
-
-    .rabbit-step:nth-child(2) {
-      margin-left: 22px
-    }
-
-    .rabbit-step:nth-child(3) {
-      margin-left: 44px
-    }
-
-    .rabbit-step:nth-child(4) {
-      margin-left: 66px
-    }
-
-    .rabbit-step:nth-child(5) {
-      margin-left: 88px
-    }
-
-    .rabbit-step:nth-child(6) {
-      margin-left: 110px;
-      background: var(--purple);
-      color: #fff
-    }
-
-    @media(max-width:600px) {
-      .rabbit-step {
-        margin-left: 0 !important;
-        font-size: .94rem
-      }
-    }
-
-    .founders {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-      margin: 1.6rem 0;
-      max-width: 640px
-    }
-
-    @media(max-width:560px) {
-      .founders {
-        grid-template-columns: 1fr
-      }
-    }
-
-    .founders .artifact {
-      transform: none;
-      margin: 0;
-      max-width: none
-    }
-
-    .founders .artifact:nth-of-type(even) {
-      transform: none
-    }
-
-    .facts {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0;
-      margin: 2rem 0;
-      border: 3px solid #000;
-      box-shadow: var(--hard);
-      max-width: 640px
-    }
-
-    .fact {
-      padding: 16px 18px;
-      flex: 1;
-      min-width: 110px;
-      background: var(--white);
-      border-right: 3px solid #000
-    }
-
-    .fact:last-child {
-      border-right: none
-    }
-
-    .fact b {
-      font-family: var(--serif);
-      font-size: 1.7rem;
-      display: block;
-      line-height: 1;
-      color: var(--purple)
-    }
-
-    .fact span {
-      font-size: .62rem;
-      font-family: var(--mono);
-      color: var(--muted);
-      margin-top: 6px;
-      display: block;
-      letter-spacing: .03em
-    }
-
-    @media(max-width:560px) {
-      .fact {
-        border-right: none;
-        border-bottom: 3px solid #000;
-        flex-basis: 40%
-      }
-    }
-
-    .imagi-note {
-      background: var(--white);
-      border: 1px solid var(--paper-edge);
-      border-left: 5px solid var(--purple);
-      padding: 20px 22px;
-      box-shadow: var(--hard);
-      margin: 1.5rem 0;
-      font-size: 1.02rem;
-      max-width: 600px
-    }
-
-    .imagi-note .label {
-      display: block;
-      font-family: var(--mono);
-      font-size: .6rem;
-      color: var(--pink);
-      margin-bottom: 8px;
-      letter-spacing: .05em
-    }
-
-    .imagi-note a {
-      color: var(--purple);
-      text-decoration: underline;
-      font-size: .76rem;
-      font-family: var(--mono)
-    }
-
-    /* ============================================================
+/* ============================================================
    FINALE — deconstruction / inside cover
    ============================================================ */
-    #finale {
-      background: var(--charcoal);
-      color: var(--paper);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 80px 26px;
-      text-align: center;
-      position: relative;
-      overflow: hidden
-    }
+#finale{background:var(--charcoal);color:var(--paper);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:80px 26px;text-align:center;position:relative;overflow:hidden}
+#finale .edges{position:absolute;top:0;left:0;bottom:0;width:14px;background:repeating-linear-gradient(to right,#323232 0 2px,#3a3a3a 2px 4px)}
+/* floating fragments that fade out */
+.frag{position:absolute;font-family:var(--mono);font-size:.6rem;color:#6a665c;border:1px solid #444;padding:6px 9px;z-index:1;transition:opacity 1s var(--ease),transform 1s var(--ease)}
+#finale.settled .frag{opacity:0;transform:scale(.9)}
+.finale-inner{max-width:680px;position:relative;z-index:3}
+.fin-pagenum{font-family:var(--mono);font-size:.66rem;color:var(--muted);margin-bottom:2.4rem;letter-spacing:.06em}
+.fin-line{font-family:var(--serif);font-weight:400;font-size:clamp(1.5rem,5.4vw,2.7rem);line-height:1.16;margin-bottom:1.4rem;opacity:0;transform:translateY(18px);transition:.9s var(--ease)}
+.fin-line.in{opacity:1;transform:none}
+.fin-line.two{color:var(--yellow)}
+.fin-title{font-family:var(--pixel);font-size:clamp(.82rem,3.2vw,1.1rem);line-height:1.6;margin-top:2rem;color:var(--pink);opacity:0;transform:translateY(18px);transition:.9s var(--ease) .3s}
+.fin-title.in{opacity:1;transform:none}
+.signoff{margin-top:3rem;border-top:1px solid #444;padding-top:2rem;opacity:0;transition:.9s var(--ease) .6s}
+.signoff.in{opacity:1}
+.signoff .name{font-family:var(--sans);font-weight:700;font-size:1.4rem}
+.signoff .role{font-family:var(--mono);font-size:.64rem;color:var(--yellow);margin-top:6px;letter-spacing:.04em}
+.signoff .links{display:flex;gap:11px;justify-content:center;margin-top:1.7rem;flex-wrap:wrap}
+.signoff .links a{font-family:var(--pixel);font-size:.64rem;background:var(--yellow);color:var(--charcoal);border:3px solid #000;padding:14px 18px;text-decoration:none;box-shadow:var(--hard-pk);transition:.13s var(--ease)}
+.signoff .links a:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--pink)}
+.signoff .links a:focus-visible{outline:3px solid var(--paper);outline-offset:3px}
+.fin-colophon{margin-top:2.6rem;font-family:var(--mono);font-size:.6rem;color:var(--muted);line-height:1.8;letter-spacing:.04em}
 
-    #finale .edges {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      width: 14px;
-      background: repeating-linear-gradient(to right, #323232 0 2px, #3a3a3a 2px 4px)
-    }
+.end-mark{text-align:center;font-family:var(--mono);font-size:.6rem;color:var(--muted);padding:24px;background:var(--paper);letter-spacing:.05em}
 
-    /* floating fragments that fade out */
-    .frag {
-      position: absolute;
-      font-family: var(--mono);
-      font-size: .6rem;
-      color: #6a665c;
-      border: 1px solid #444;
-      padding: 6px 9px;
-      z-index: 1;
-      transition: opacity 1s var(--ease), transform 1s var(--ease)
-    }
-
-    #finale.settled .frag {
-      opacity: 0;
-      transform: scale(.9)
-    }
-
-    .finale-inner {
-      max-width: 680px;
-      position: relative;
-      z-index: 3
-    }
-
-    .fin-pagenum {
-      font-family: var(--mono);
-      font-size: .66rem;
-      color: var(--muted);
-      margin-bottom: 2.4rem;
-      letter-spacing: .06em
-    }
-
-    .fin-line {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: clamp(1.5rem, 5.4vw, 2.7rem);
-      line-height: 1.16;
-      margin-bottom: 1.4rem;
-      opacity: 0;
-      transform: translateY(18px);
-      transition: .9s var(--ease)
-    }
-
-    .fin-line.in {
-      opacity: 1;
-      transform: none
-    }
-
-    .fin-line.two {
-      color: var(--yellow)
-    }
-
-    .fin-title {
-      font-family: var(--pixel);
-      font-size: clamp(.82rem, 3.2vw, 1.1rem);
-      line-height: 1.6;
-      margin-top: 2rem;
-      color: var(--pink);
-      opacity: 0;
-      transform: translateY(18px);
-      transition: .9s var(--ease) .3s
-    }
-
-    .fin-title.in {
-      opacity: 1;
-      transform: none
-    }
-
-    .signoff {
-      margin-top: 3rem;
-      border-top: 1px solid #444;
-      padding-top: 2rem;
-      opacity: 0;
-      transition: .9s var(--ease) .6s
-    }
-
-    .signoff.in {
-      opacity: 1
-    }
-
-    .signoff .name {
-      font-family: var(--sans);
-      font-weight: 700;
-      font-size: 1.4rem
-    }
-
-    .signoff .role {
-      font-family: var(--mono);
-      font-size: .64rem;
-      color: var(--yellow);
-      margin-top: 6px;
-      letter-spacing: .04em
-    }
-
-    .signoff .links {
-      display: flex;
-      gap: 11px;
-      justify-content: center;
-      margin-top: 1.7rem;
-      flex-wrap: wrap
-    }
-
-    .signoff .links a {
-      font-family: var(--pixel);
-      font-size: .64rem;
-      background: var(--yellow);
-      color: var(--charcoal);
-      border: 3px solid #000;
-      padding: 14px 18px;
-      text-decoration: none;
-      box-shadow: var(--hard-pk);
-      transition: .13s var(--ease)
-    }
-
-    .signoff .links a:hover {
-      transform: translate(-2px, -2px);
-      box-shadow: 7px 7px 0 var(--pink)
-    }
-
-    .signoff .links a:focus-visible {
-      outline: 3px solid var(--paper);
-      outline-offset: 3px
-    }
-
-    .fin-colophon {
-      margin-top: 2.6rem;
-      font-family: var(--mono);
-      font-size: .6rem;
-      color: var(--muted);
-      line-height: 1.8;
-      letter-spacing: .04em
-    }
-
-    .end-mark {
-      text-align: center;
-      font-family: var(--mono);
-      font-size: .6rem;
-      color: var(--muted);
-      padding: 24px;
-      background: var(--paper);
-      letter-spacing: .05em
-    }
-
-    /* DEV */
-    .dev-toggle {
-      position: fixed;
-      bottom: 70px;
-      right: 14px;
-      z-index: 750;
-      font-family: var(--mono);
-      font-size: .54rem;
-      background: var(--charcoal);
-      color: #9a9488;
-      border: none;
-      padding: 7px 9px;
-      cursor: pointer;
-      box-shadow: var(--hard);
-      opacity: .6
-    }
-
-    .dev-toggle:hover {
-      opacity: 1;
-      color: var(--yellow)
-    }
-
-    @media(min-width:901px) {
-      .dev-toggle {
-        bottom: 14px
-      }
-    }
-
-    #asset-checklist {
-      display: none;
-      padding: 56px 22px;
-      max-width: 900px;
-      margin: 0 auto;
-      background: var(--paper-2)
-    }
-
-    #asset-checklist.show {
-      display: block
-    }
-
-    #asset-checklist h3 {
-      font-family: var(--mono);
-      color: var(--charcoal);
-      margin-bottom: 18px;
-      font-size: .8rem;
-      letter-spacing: .03em
-    }
-
-    #asset-checklist table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: .8rem;
-      background: var(--white);
-      border: 1px solid var(--paper-edge)
-    }
-
-    #asset-checklist td,
-    #asset-checklist th {
-      border-bottom: 1px solid var(--paper-edge);
-      padding: 9px 11px;
-      text-align: left
-    }
-
-    #asset-checklist th {
-      font-family: var(--mono);
-      font-size: .6rem;
-      color: var(--pink)
-    }
-
-    /* Artifact with real image */
-    .art-img{width:100%;display:block;border:2px solid var(--paper-edge)}
-
-    /* Scroll carousel for multiple images */
-    .art-scroll{
-      display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
-      -webkit-overflow-scrolling:touch;padding-bottom:8px;
-    }
-    .art-scroll::-webkit-scrollbar{height:6px}
-    .art-scroll::-webkit-scrollbar-track{background:var(--paper-2);border-radius:3px}
-    .art-scroll::-webkit-scrollbar-thumb{background:var(--purple);border-radius:3px}
-    .art-scroll::-webkit-scrollbar-thumb:hover{background:var(--pink)}
-    .art-scroll img{
-      flex:0 0 100%;width:100%;scroll-snap-align:start;border:2px solid var(--paper-edge);
-      object-fit:cover;
-    }
-    .art-scroll-hint{
-      display:flex;align-items:center;gap:6px;margin-top:6px;
-      font-family:var(--mono);font-size:.56rem;color:var(--muted);letter-spacing:.04em;
-    }
-    .art-scroll-dots{display:flex;gap:5px}
-    .art-scroll-dot{
-      width:7px;height:7px;border-radius:50%;background:var(--paper-edge);
-      transition:background .3s var(--ease);
-    }
-    .art-scroll-dot.active{background:var(--pink)}
-  </style>
+/* DEV */
+.dev-toggle{position:fixed;bottom:70px;right:14px;z-index:750;font-family:var(--mono);font-size:.54rem;background:var(--charcoal);color:#9a9488;border:none;padding:7px 9px;cursor:pointer;box-shadow:var(--hard);opacity:.6}
+.dev-toggle:hover{opacity:1;color:var(--yellow)}
+@media(min-width:901px){.dev-toggle{bottom:14px}}
+#asset-checklist{display:none;padding:56px 22px;max-width:900px;margin:0 auto;background:var(--paper-2)}
+#asset-checklist.show{display:block}
+#asset-checklist h3{font-family:var(--mono);color:var(--charcoal);margin-bottom:18px;font-size:.8rem;letter-spacing:.03em}
+#asset-checklist table{width:100%;border-collapse:collapse;font-size:.8rem;background:var(--white);border:1px solid var(--paper-edge)}
+#asset-checklist td,#asset-checklist th{border-bottom:1px solid var(--paper-edge);padding:9px 11px;text-align:left}
+#asset-checklist th{font-family:var(--mono);font-size:.6rem;color:var(--pink)}
+</style>
 </head>
+<body>
 
-<body class="no-scroll">
+<!-- ============ HERO — THE SHELF ============ -->
+<header id="hero">
+  <div class="hero-top">
+    <span class="meta">Personal Archive / 2026</span>
+    <span class="meta">Praise Akinde · Ed. 01</span>
+  </div>
+  <div class="hero-center">
+    <span class="hero-eyebrow">A STORY IN SEVEN BOOKS</span>
+    <h1 class="hero-title">Why I'd love to build at <em>imagi.</em></h1>
+    <p class="hero-sub">Let me tell you a story. About a computer, a teacher, an <b>AI</b>, and why I ended up here.</p>
+    <div class="hero-name">PRAISE AKINDE — PRODUCT DESIGNER</div>
+    <button class="hero-scroll" id="heroScroll" aria-label="Open the first book">
+      <span>PULL A BOOK TO BEGIN</span>
+      <span class="arrow">▾</span>
+    </button>
+  </div>
+  <div class="shelf-stage">
+    <div class="books" id="heroBooks"></div>
+    <div class="shelf-plank"></div>
+    <span class="hero-hint">pull a book to open its chapter</span>
+  </div>
+</header>
 
-  <!-- ============ COVER ============ -->
-  <section id="cover">
-    <div class="edges"></div>
-    <div class="bookmark"></div>
-    <span class="stamp s1">CASE FILE 01</span>
-    <span class="stamp s2">PERSONAL ARCHIVE</span>
-    <div class="cover-inner">
-      <div class="cover-top">
-        <span class="meta">Personal Archive / 2026</span>
-        <span class="meta">Ed. 01</span>
-      </div>
-      <h1 class="cover-title">I want to tell you a story.</h1>
-      <p class="cover-sub">About a computer.<br>A teacher.<br>An <b>AI</b>.<br>And why I ended up here.</p>
-      <div class="cover-name">PRAISE AKINDE<span>PRODUCT DESIGNER</span></div>
-      <div class="cover-foot"><button class="start-btn" id="startBtn">START THE STORY ▸</button></div>
-    </div>
-  </section>
+<!-- ============ CHROME ============ -->
+<div id="progress"></div>
+<div id="filetag">CASE FILE <b>01</b> / 07 — THE FIRST COMPUTER</div>
+<nav id="shelf" aria-label="Chapters"></nav>
+<nav id="mshelf" aria-label="Chapters"></nav>
 
-  <!-- ============ CHROME ============ -->
-  <div id="progress"></div>
-  <div id="filetag">CASE FILE <b>01</b> / 07 — THE FIRST COMPUTER</div>
-  <nav id="shelf" aria-label="Chapters"></nav>
-  <nav id="mshelf" aria-label="Chapters"></nav>
+<!-- ============ STORY ============ -->
+<main id="story" class="show sealed">
 
-  <!-- ============ STORY ============ -->
-  <main id="story">
-
-    <!-- CH1 -->
-    <section class="chapter" id="ch1" data-ch="1" style="--spinec:#4600FF">
-      <div class="ch-wrap">
-        <div class="ch-head reveal">
-          <div class="ch-bignum">01</div>
-          <div class="ch-headmeta">
-            <span class="meta">Case File 01 · Early life</span>
-            <h2 class="ch-title">The first time technology became more than a screen</h2>
-          </div>
-        </div>
-        <div class="ch-body">
-          <p class="lead reveal">I was around six or seven when I first used a computer. Back then it was games and
-            movies. The things a child does with a screen.</p>
-          <p class="reveal">At 16, that changed. I started graphic design and printing, and by 17 I was fascinated by
-            what I could make. I could take something that existed only in my head and turn it into something another
-            person could <span class="hl">see</span>.</p>
-          <div class="artifact reveal" data-id="[ 02 · FIRST DESIGN ]">
-            <img class="art-img" src="Asset/Early graphic design.jpg" alt="Early graphic design work">
-            <div class="art-cap"><span class="meta">2017</span><span class="meta">scan 02</span></div>
-          </div>
-          <p class="reveal">Branding in 2020. Product Design in 2022. And I've kept exploring ever since, right up to
-            AI-assisted building.</p>
-          <div class="artifact reveal" data-id="[ 03 · DESIGN EVOLUTION ]">
-            <img class="art-img" src="Asset/Design evolution.jpg" alt="Design evolution over the years">
-            <div class="art-cap"><span class="meta">2017 → now</span><span class="meta">scan 03</span></div>
-          </div>
-          <p class="pull reveal">Early exposure to technology changed what I believed was possible for me.</p>
-          <div class="timeline">
-            <div class="tl-item reveal">
-              <div class="tl-year">06/07</div>
-              <div class="tl-text"><b>First exposure</b><span>Computers, through games and movies</span></div>
-            </div>
-            <div class="tl-item reveal">
-              <div class="tl-year">16</div>
-              <div class="tl-text"><b>Graphic design + printing</b><span>The first time I made things</span></div>
-            </div>
-            <div class="tl-item reveal hot">
-              <div class="tl-year">17</div>
-              <div class="tl-text"><b>Technology becomes a creative tool</b><span>An idea in my head, made real</span>
-              </div>
-            </div>
-            <div class="tl-item reveal">
-              <div class="tl-year">2020</div>
-              <div class="tl-text"><b>Branding</b><span>Identity and meaning</span></div>
-            </div>
-            <div class="tl-item reveal">
-              <div class="tl-year">2022</div>
-              <div class="tl-text"><b>Product Design</b><span>People, problems, experiences</span></div>
-            </div>
-            <div class="tl-item reveal">
-              <div class="tl-year">2024</div>
-              <div class="tl-text"><b>Serious AI exploration</b><span>A new way to learn and build</span></div>
-            </div>
-            <div class="tl-item reveal now">
-              <div class="tl-year">2025</div>
-              <div class="tl-text"><b>AI-native building</b><span>Design and code, together</span></div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CH2 -->
-    <section class="chapter" id="ch2" data-ch="2" style="--spinec:#FF00FF">
-      <div class="ch-wrap">
-        <div class="ch-head reveal">
-          <div class="ch-bignum">02</div>
-          <div class="ch-headmeta"><span class="meta">Case File 02 · Education</span>
-            <h2 class="ch-title">Learning how people learn</h2>
-          </div>
-        </div>
-        <div class="ch-body">
-          <p class="lead reveal">My background in education came before Product Design.</p>
-          <p class="reveal">I studied Education Mathematics, the path to becoming an educator. It taught me how to
-            relate to students and think about learning from the side of the person trying to understand something.
-            Later I moved into Computer Science, but Product Design was already part of my journey by then.</p>
-          <div class="artifact reveal" data-id="[ 04 · UNIVERSITY ]">
-            <img class="art-img" src="Asset/Education  university.jpg" alt="Education Mathematics / university">
-            <div class="art-cap"><span class="meta">record</span><span class="meta">scan 04</span></div>
-          </div>
-          <span class="annot reveal">education → design → technology</span>
-          <p class="pull reveal">Education taught me about learning. Product Design taught me about people. Technology
-            gave me the tools to build.</p>
-          <p class="reveal">Those three worlds became a big part of who I am.</p>
-          <div class="artifact reveal" data-id="[ 05 · EARLY PD ]">
-            <div class="art-scroll" data-carousel="early-pd">
-              <img src="Asset/Early Product Design.jpg" alt="Early Product Design work — 1">
-              <img src="Asset/Early Product Design (2).jpg" alt="Early Product Design work — 2">
-            </div>
-            <div class="art-scroll-hint">
-              <span>SWIPE ▸</span>
-              <div class="art-scroll-dots" data-dots="early-pd">
-                <span class="art-scroll-dot active"></span>
-                <span class="art-scroll-dot"></span>
-              </div>
-            </div>
-            <div class="art-cap"><span class="meta">2022</span><span class="meta">scan 05</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CH3 -->
-    <section class="chapter" id="ch3" data-ch="3" style="--spinec:#FAB300">
-      <div class="ch-wrap">
-        <div class="ch-head reveal">
-          <div class="ch-bignum">03</div>
-          <div class="ch-headmeta"><span class="meta">Case File 03 · Teaching</span>
-            <h2 class="ch-title">Learning to help other people create</h2>
-          </div>
-        </div>
-        <div class="ch-body">
-          <p class="lead reveal">Teaching became one of the things I genuinely enjoy.</p>
-          <p class="reveal">At TechCrush I've taught and mentored thousands of aspiring Product Designers, and tutored
-            others on my own. More recently I taught children around seven and eight basic UI/UX and coding, including
-            HTML and web development.</p>
-          <div class="artifact reveal" data-id="[ 06 · TECHCRUSH ]">
-            <img class="art-img" src="Asset/TechCrush teaching.jpg" alt="TechCrush teaching sessions">
-            <div class="art-cap"><span class="meta">cohort</span><span class="meta">scan 06</span></div>
-          </div>
-          <p class="reveal">My favourite part is watching a student pull an idea forward. Tap the document:</p>
-          <div class="tcard reveal" id="tcard" tabindex="0" role="button"
-            aria-label="Reveal the moment a student understands">
-            <div class="sheet s-back">"Wait. I can actually do this."</div>
-            <div class="sheet s-front">"I don't understand this."</div>
-            <span class="hintlabel">tap to pull forward</span>
-          </div>
-          <div class="artifact tall reveal" data-id="[ 07 · TEACHING CHILDREN ]">
-            <img class="art-img" src="Asset/Teaching children.jpg" alt="Teaching children ages 7-8" style="height:100%;object-fit:cover">
-            <div class="art-cap"><span class="meta">recent</span><span class="meta">scan 07</span></div>
-          </div>
-          <p class="reveal">Students have come back after their programs to tell me how it changed their lives. Those
-            moments stay with me.</p>
-          <p class="pull reveal">Education isn't just transferring information. It's expanding what someone believes
-            they can do.</p>
-          <div class="artifact reveal" data-id="[ 08 · STUDENT FEEDBACK ]">
-            <div class="art-scroll" data-carousel="student-feedback">
-              <img src="Asset/Student testimonial 1.png" alt="Student testimonial 1">
-              <img src="Asset/Student testimonial 2.jpg" alt="Student testimonial 2">
-            </div>
-            <div class="art-scroll-hint">
-              <span>SWIPE ▸</span>
-              <div class="art-scroll-dots" data-dots="student-feedback">
-                <span class="art-scroll-dot active"></span>
-                <span class="art-scroll-dot"></span>
-              </div>
-            </div>
-            <div class="art-cap"><span class="meta">evidence</span><span class="meta">scan 08</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CH4 -->
-    <section class="chapter" id="ch4" data-ch="4" style="--spinec:#2B6BFF">
-      <div class="ch-wrap">
-        <div class="ch-head reveal">
-          <div class="ch-bignum">04</div>
-          <div class="ch-headmeta"><span class="meta">Case File 04 · Paper becomes digital</span>
-            <h2 class="ch-title">When AI changed how I learn</h2>
-          </div>
-        </div>
-        <div class="ch-body">
-          <p class="lead reveal">I started exploring AI seriously around 2024, and by 2025 it was deep in how I work.
-          </p>
-          <p class="reveal">The first time I used AI to build a website, I was genuinely shocked by what was possible.
-          </p>
-          <p class="reveal">It changed how I approach ideas. I could explore, learn, prototype, build, and test faster.
-          </p>
-          <p class="pull reveal">AI became a multiplier for me. Not a replacement for thinking.</p>
-          <div class="pipeline" id="pipeline">
-            <p class="reveal meta" style="margin-bottom:.9rem">The workflow — tap a stage to open its artifact</p>
-            <div class="pipe-steps reveal">
-              <button class="pipe-btn active" data-step="0">IDEA</button><span class="pipe-arrow">▸</span>
-              <button class="pipe-btn" data-step="1">RESEARCH</button><span class="pipe-arrow">▸</span>
-              <button class="pipe-btn" data-step="2">EXPLORE</button><span class="pipe-arrow">▸</span>
-              <button class="pipe-btn" data-step="3">DESIGN</button><span class="pipe-arrow">▸</span>
-              <button class="pipe-btn" data-step="4">BUILD</button><span class="pipe-arrow">▸</span>
-              <button class="pipe-btn" data-step="5">TEST</button><span class="pipe-arrow">▸</span>
-              <button class="pipe-btn" data-step="6">ITERATE</button>
-            </div>
-            <div class="pipe-panel reveal" id="pipePanel"></div>
-            <p class="digital-shift">▚ the archive turns from paper into screens here ▚</p>
-          </div>
-          <p class="reveal">But I've seen the other side too. Students using AI to cheat, to avoid learning, to treat it
-            as a shortcut instead of a tool for thinking. That made me ask a different question:</p>
-          <p class="pull reveal">What happens when children are taught to use AI to create, instead of simply using it
-            to get answers?</p>
-          <p class="reveal">That question is one of the reasons imagi caught my attention.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CH5 -->
-    <section class="chapter" id="ch5" data-ch="5" style="--spinec:#3DD68C">
-      <div class="ch-wrap">
-        <div class="ch-head reveal">
-          <div class="ch-bignum">05</div>
-          <div class="ch-headmeta"><span class="meta">Case File 05 · Discovery</span>
-            <h2 class="ch-title">Finding imagi</h2>
-          </div>
-        </div>
-        <div class="ch-body">
-          <p class="lead reveal">I discovered imagi while researching startups building interesting things. I went down
-            a rabbit hole.</p>
-          <div class="rabbit reveal">
-            <div class="rabbit-step"><span class="rb-num">01</span> imagi</div>
-            <div class="rabbit-step"><span class="rb-num">02</span> the founders</div>
-            <div class="rabbit-step"><span class="rb-num">03</span> the product</div>
-            <div class="rabbit-step"><span class="rb-num">04</span> the mission</div>
-            <div class="rabbit-step"><span class="rb-num">05</span> AI literacy &amp; education</div>
-            <div class="rabbit-step"><span class="rb-num">06</span> "I want to work here."</div>
-          </div>
-          <p class="reveal">I watched your videos and researched the company and the founders. I found Dora. I found
-            Beatrice. And the more I learned, the more I wanted to understand what you were building.</p>
-          <div class="founders" style="grid-template-columns:1fr">
-            <div class="artifact reveal" data-id="[ 14 · DORA + BEATRICE ]">
-              <img class="art-img" src="Asset/Dora + Beatrice.jpg" alt="Dora and Beatrice — imagi founders">
-              <div class="art-cap"><span class="meta">founders</span><span class="meta">scan 14</span></div>
-            </div>
-          </div>
-          <div class="imagi-note reveal">
-            <span class="label">▸ WHY THIS CAUGHT MY ATTENTION</span>
-            What caught me wasn't just that imagi teaches children AI. It was the philosophy behind it.
-          </div>
-          <p class="pull reveal">AI should expand what children can create, not replace the process of learning.</p>
-          <p class="reveal">I'm drawn to a team that's deeply serious about the problem while keeping creativity and
-            enjoyment in how they build. I know what technology did for me early, and what AI does for me now. I want
-            more people to experience technology as something they create with, not just consume.</p>
-          <div class="imagi-note reveal">
-            <span class="label">▸ ON FILE · IMAGI</span>
-            imagi is building a safe education layer between AI tools and schools, helping students and educators use AI
-            in structured, creative ways. Its message says it plainly: from cheating to creating with AI.
-            <br><br><a href="https://imagilabs.com/pages/about-us" target="_blank" rel="noopener">imagilabs.com/about-us
-              ▸</a>
-          </div>
-          <div class="facts reveal">
-            <div class="fact"><b>0.7M+</b><span>children</span></div>
-            <div class="fact"><b>30k+</b><span>educators</span></div>
-            <div class="fact"><b>100+</b><span>districts</span></div>
-            <div class="fact"><b>140+</b><span>countries</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CH6 -->
-    <section class="chapter" id="ch6" data-ch="6" style="--spinec:#292929">
-      <div class="ch-wrap">
-        <div class="ch-head reveal">
-          <div class="ch-bignum">06</div>
-          <div class="ch-headmeta"><span class="meta">Case File 06 · The toolkit</span>
-            <h2 class="ch-title">Why I think I belong in this room</h2>
-          </div>
-        </div>
-        <div class="ch-body">
-          <p class="lead reveal">My experience has given me a combination that feels deeply relevant to what imagi is
-            building. Tap a word:</p>
-          <div class="reveal-strip reveal">
-            <button class="rword" data-word="education">EDUCATION</button>
-            <button class="rword" data-word="design">DESIGN</button>
-            <button class="rword" data-word="ai">AI</button>
-            <button class="rword" data-word="build">BUILD</button>
-            <button class="rword" data-word="children">CHILDREN</button>
-          </div>
-          <div class="rword-panel" id="rwordPanel"><span class="tag">▸ TAP A WORD ABOVE</span>
-            <p>Each part of my background points at the same problem imagi is solving.</p>
-          </div>
-          <p class="reveal">I've designed fintech, SaaS, AI and Web3 products, and used Claude Code to turn designs into
-            working ones. I've studied Education Mathematics and Computer Science. I've taught thousands of people,
-            taught children, and designed products for students.</p>
-          <p class="pull reveal">I've experienced technology as a student, an educator, a designer, and a builder.</p>
-          <p class="reveal" style="font-weight:600;margin-top:1.6rem">MindWell brought many of those worlds together.
-          </p>
-          <div class="mw reveal" id="mindwell">
-            <div class="mw-toggle"><button class="mw-tab active" data-mw="before">BEFORE</button><button class="mw-tab"
-                data-mw="after">AFTER</button></div>
-            <div class="mw-flow active" data-flow="before">
-              <div class="mw-stage"><span class="s-label">MY ASSUMPTION</span>
-                <p>I assumed I knew what students would want from an AI mental-health product.</p>
-              </div>
-              <div class="mw-stage"><span class="s-label">RESEARCH</span>
-                <p>I spoke with students and tested the product. Some of my assumptions were wrong.</p>
-              </div>
-            </div>
-            <div class="mw-flow" data-flow="after">
-              <div class="mw-stage"><span class="s-label">SIMPLIFIED</span>
-                <p>I simplified the core journeys and changed the AI interaction.</p>
-              </div>
-              <div class="mw-stage"><span class="s-label">BUILT</span>
-                <p>I iterated the prompts and AI behaviour, building it with AI-assisted development, including Claude
-                  Code.</p>
-              </div>
-              <div class="mw-stage"><span class="s-label">OBSERVED</span>
-                <p>I watched real users and fixed issues based on what I saw.</p>
-              </div>
-              <div class="mw-lesson">The technology is never the point. The person using it is.</div>
-            </div>
-          </div>
-          <div class="artifact reveal" data-id="[ 15 · MINDWELL ]">
-            <img class="art-img" src="Asset/Mindwell.png" alt="MindWell — AI mental health product">
-            <div class="art-cap"><span class="meta">case study</span><span class="meta">frame 15</span></div>
-          </div>
-          <div class="artifact reveal" data-id="[ 16 · EWAVE ]">
-            <img class="art-img" src="Asset/Ewave.jpg" alt="Ewave Finance — product design">
-            <div class="art-cap"><span class="meta">$100K+ beta</span><span class="meta">frame 16</span></div>
-          </div>
-          <div class="split reveal">
-            <div class="split-col design">
-              <h4>DESIGN</h4>
-              <ul>
-                <li>Figma</li>
-                <li>Research</li>
-                <li>Flows</li>
-                <li>Systems</li>
-                <li>Prototypes</li>
-              </ul>
-            </div>
-            <div class="split-mid">+</div>
-            <div class="split-col build">
-              <h4>BUILD</h4>
-              <ul>
-                <li>Claude Code</li>
-                <li>React</li>
-                <li>HTML / CSS</li>
-                <li>AI-assisted dev</li>
-                <li>Working products</li>
-              </ul>
-            </div>
-            <div class="split-plus">DESIGN + BUILD</div>
-          </div>
-          <div class="artifact wide reveal" data-id="[ 17 · DESIGN + BUILD ]">
-            <img class="art-img" src="Asset/Design + Build.jpg" alt="Design and Build — full workflow">
-            <div class="art-cap"><span class="meta">workflow</span><span class="meta">frame 17</span></div>
-          </div>
-          <p class="reveal">And one more thing I'd bring: I figure things out. I don't always know the answer when I
-            start, and I'm comfortable learning, experimenting, and improving until I find a way forward.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CH7 -->
-    <section class="chapter" id="ch7" data-ch="7" style="--spinec:#4600FF">
-      <div class="ch-wrap">
-        <div class="ch-head reveal">
-          <div class="ch-bignum">07</div>
-          <div class="ch-headmeta"><span class="meta">Case File 07 · Conclusion</span>
-            <h2 class="ch-title">So, why imagi?</h2>
-          </div>
-        </div>
-        <div class="ch-body">
-          <p class="lead reveal">Because this connects almost every chapter of my life.</p>
-          <p class="reveal">The child introduced to computers early. The teenager who found technology could be a
-            creative tool. The designer, the education student, the tutor who's watched students discover what they're
-            capable of, the builder who found what AI can unlock. And the person who has seen both sides of AI: how it
-            accelerates learning, and how it becomes a shortcut when no one teaches you to use it properly.</p>
-          <p class="pull reveal">Children deserve more than access to technology.</p>
-          <p class="reveal">They deserve to understand it. Question it. Create with it. And eventually, shape it.</p>
-          <p class="reveal">That's what excites me about imagi. Technology changed the trajectory of my life, and I'd
-            love to help give another child that same chance.</p>
-          <span class="annot reveal">that's why I want to build with imagi.</span>
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ============ FINALE ============ -->
-  <section id="finale">
-    <div class="edges"></div>
-    <span class="frag" style="top:14%;left:8%">scan 01 · childhood</span>
-    <span class="frag" style="top:22%;right:9%">scan 07 · teaching</span>
-    <span class="frag" style="top:40%;left:6%">frame 11 · claude code</span>
-    <span class="frag" style="bottom:26%;right:8%">frame 15 · mindwell</span>
-    <span class="frag" style="bottom:16%;left:12%">frame 16 · ewave</span>
-    <span class="frag" style="top:34%;right:16%">idea → build → iterate</span>
-    <div class="finale-inner">
-      <div class="fin-pagenum">07 / 07 — INSIDE COVER</div>
-      <p class="fin-line one" id="finLine1">Technology changed the trajectory of my life.</p>
-      <p class="fin-line two" id="finLine2">Now I want to help the next generation discover what's possible.</p>
-      <p class="fin-title" id="finTitle">Why I want to build with imagi.</p>
-      <div class="signoff" id="signoff">
-        <div class="name">Praise Akinde</div>
-        <div class="role">PRODUCT DESIGNER</div>
-        <div class="links">
-          <a href="#" data-link="portfolio">PORTFOLIO ▸</a>
-          <a href="#" data-link="linkedin">LINKEDIN ▸</a>
-          <a href="#" data-link="email">EMAIL ▸</a>
-        </div>
-        <p class="fin-colophon">PRAISE AKINDE<br>WHY I WANT TO BUILD WITH IMAGI · 2026</p>
+<!-- CH1 -->
+<section class="chapter" id="ch1" data-ch="1" style="--spinec:#4600FF">
+  <div class="ch-wrap">
+    <div class="ch-head reveal">
+      <div class="ch-bignum">01</div>
+      <div class="ch-headmeta">
+        <span class="meta">Case File 01 · Early life</span>
+        <h2 class="ch-title">The first time technology became more than a screen</h2>
       </div>
     </div>
-  </section>
+    <div class="ch-body">
+      <p class="lead reveal">I was around six or seven when I first used a computer. Back then it was games and movies. The things a child does with a screen.</p>
+      <p class="reveal">At 16, that changed. I started graphic design and printing, and by 17 I was fascinated by what I could make. I could take something that existed only in my head and turn it into something another person could <span class="hl">see</span>.</p>
+      <p class="reveal">Branding in 2020. Product Design in 2022. And I've kept exploring ever since, right up to AI-assisted building.</p>
+      <div class="artifact reveal" data-id="[ 02 · FIRST DESIGN ]"><div class="art-inner"><img src="Asset/Early graphic design.jpg" alt="Early graphic design work"></div><div class="art-cap"><span class="meta">2017</span><span class="meta">scan 02</span></div></div>
+      <div class="artifact reveal" data-id="[ 03 · DESIGN EVOLUTION ]"><div class="art-inner"><img src="Asset/Design evolution.jpg" alt="Design evolution"></div><div class="art-cap"><span class="meta">evolution</span><span class="meta">scan 03</span></div></div>
+      <p class="pull reveal">Early exposure to technology changed what I believed was possible for me.</p>
+      <div class="timeline">
+        <div class="tl-item reveal"><div class="tl-year">06/07</div><div class="tl-text"><b>First exposure</b><span>Computers, through games and movies</span></div></div>
+        <div class="tl-item reveal"><div class="tl-year">16</div><div class="tl-text"><b>Graphic design + printing</b><span>The first time I made things</span></div></div>
+        <div class="tl-item reveal hot"><div class="tl-year">17</div><div class="tl-text"><b>Technology becomes a creative tool</b><span>An idea in my head, made real</span></div></div>
+        <div class="tl-item reveal"><div class="tl-year">2020</div><div class="tl-text"><b>Branding</b><span>Identity and meaning</span></div></div>
+        <div class="tl-item reveal"><div class="tl-year">2022</div><div class="tl-text"><b>Product Design</b><span>People, problems, experiences</span></div></div>
+        <div class="tl-item reveal"><div class="tl-year">2024</div><div class="tl-text"><b>Serious AI exploration</b><span>A new way to learn and build</span></div></div>
+        <div class="tl-item reveal now"><div class="tl-year">2025</div><div class="tl-text"><b>AI-native building</b><span>Design and code, together</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <div class="end-mark">◆ END OF ARCHIVE ◆</div>
+<!-- CH2 -->
+<section class="chapter" id="ch2" data-ch="2" style="--spinec:#FF00FF">
+  <div class="ch-wrap">
+    <div class="ch-head reveal">
+      <div class="ch-bignum">02</div>
+      <div class="ch-headmeta"><span class="meta">Case File 02 · Education</span><h2 class="ch-title">Learning how people learn</h2></div>
+    </div>
+    <div class="ch-body">
+      <p class="lead reveal">My background in education came before Product Design.</p>
+      <p class="reveal">I studied Education Mathematics, the path to becoming an educator. It taught me how to relate to students and think about learning from the side of the person trying to understand something. Later I moved into Computer Science, but Product Design was already part of my journey by then.</p>
+      <div class="artifact reveal" data-id="[ 04 · UNIVERSITY ]"><div class="art-inner"><img src="Asset/Education  university.jpg" alt="Education and university"></div><div class="art-cap"><span class="meta">record</span><span class="meta">scan 04</span></div></div>
+      <span class="annot reveal">education → design → technology</span>
+      <p class="pull reveal">Education taught me about learning. Product Design taught me about people. Technology gave me the tools to build.</p>
+      <p class="reveal">Those three worlds became a big part of who I am.</p>
+      <div class="artifact reveal" data-id="[ 05 · EARLY PD ]"><div class="art-inner"><div class="art-gallery"><img src="Asset/Early Product Design.jpg" alt="Early Product Design 1"><img src="Asset/Early Product Design (2).jpg" alt="Early Product Design 2"><img src="Asset/Early Product Design (3).jpg" alt="Early Product Design 3"><img src="Asset/Early Product Design (4).jpg" alt="Early Product Design 4"><img src="Asset/Early Product Design (5).jpg" alt="Early Product Design 5"></div></div><div class="art-cap"><span class="meta">2022</span><span class="meta">scan 05</span></div></div>
+    </div>
+  </div>
+</section>
 
-  <!-- ============ DEV ============ -->
-  <button class="dev-toggle" id="devToggle">DEV · ASSETS</button>
-  <section id="asset-checklist">
-    <h3>ASSET CHECKLIST — replace placeholders before sending</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Asset needed</th>
-          <th>Purpose</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>01</td>
-          <td>Childhood / early technology</td>
-          <td>Chapter 1</td>
-        </tr>
-        <tr>
-          <td>02</td>
-          <td>Early graphic design</td>
-          <td>Chapter 1</td>
-        </tr>
-        <tr>
-          <td>03</td>
-          <td>Design evolution</td>
-          <td>Chapter 1</td>
-        </tr>
-        <tr>
-          <td>04</td>
-          <td>Education / university</td>
-          <td>Chapter 2</td>
-        </tr>
-        <tr>
-          <td>05</td>
-          <td>Early Product Design</td>
-          <td>Chapter 2</td>
-        </tr>
-        <tr>
-          <td>06</td>
-          <td>TechCrush teaching</td>
-          <td>Chapter 3</td>
-        </tr>
-        <tr>
-          <td>07</td>
-          <td>Teaching children</td>
-          <td>Chapter 3</td>
-        </tr>
-        <tr>
-          <td>08</td>
-          <td>Student testimonials</td>
-          <td>Chapter 3</td>
-        </tr>
-        <tr>
-          <td>09</td>
-          <td>First AI workflow</td>
-          <td>Chapter 4</td>
-        </tr>
-        <tr>
-          <td>10</td>
-          <td>AI workflow (pipeline)</td>
-          <td>Chapter 4</td>
-        </tr>
-        <tr>
-          <td>11</td>
-          <td>Claude Code / building</td>
-          <td>Chapter 4</td>
-        </tr>
-        <tr>
-          <td>12</td>
-          <td>imagi discovery</td>
-          <td>Chapter 5</td>
-        </tr>
-        <tr>
-          <td>13</td>
-          <td>Research rabbit hole</td>
-          <td>Chapter 5</td>
-        </tr>
-        <tr>
-          <td>14</td>
-          <td>Dora + Beatrice</td>
-          <td>Chapter 5</td>
-        </tr>
-        <tr>
-          <td>15</td>
-          <td>MindWell</td>
-          <td>Chapter 6</td>
-        </tr>
-        <tr>
-          <td>16</td>
-          <td>Ewave</td>
-          <td>Chapter 6</td>
-        </tr>
-        <tr>
-          <td>17</td>
-          <td>Design + Build</td>
-          <td>Chapter 6</td>
-        </tr>
-      </tbody>
-    </table>
-  </section>
+<!-- CH3 -->
+<section class="chapter" id="ch3" data-ch="3" style="--spinec:#FAB300">
+  <div class="ch-wrap">
+    <div class="ch-head reveal">
+      <div class="ch-bignum">03</div>
+      <div class="ch-headmeta"><span class="meta">Case File 03 · Teaching</span><h2 class="ch-title">Learning to help other people create</h2></div>
+    </div>
+    <div class="ch-body">
+      <p class="lead reveal">Teaching became one of the things I genuinely enjoy.</p>
+      <p class="reveal">At TechCrush I've taught and mentored thousands of aspiring Product Designers, and tutored others on my own. More recently I taught children around seven and eight basic UI/UX and coding, including HTML and web development.</p>
+      <div class="artifact reveal" data-id="[ 06 · TECHCRUSH ]"><div class="art-inner"><img src="Asset/TechCrush teaching.jpg" alt="TechCrush teaching"></div><div class="art-cap"><span class="meta">cohort</span><span class="meta">scan 06</span></div></div>
+      <p class="reveal">My favourite part is watching a student pull an idea forward. Tap the document:</p>
+      <div class="tcard reveal" id="tcard" tabindex="0" role="button" aria-label="Reveal the moment a student understands">
+        <div class="sheet s-back">"Wait. I can actually do this."</div>
+        <div class="sheet s-front">"I don't understand this."</div>
+        <span class="hintlabel">tap to pull forward</span>
+      </div>
+      <div class="artifact tall reveal" data-id="[ 07 · TEACHING CHILDREN ]"><div class="art-inner"><img src="Asset/Teaching children.jpg" alt="Teaching children"></div><div class="art-cap"><span class="meta">recent</span><span class="meta">scan 07</span></div></div>
+      <p class="reveal">Students have come back after their programs to tell me how it changed their lives. Those moments stay with me.</p>
+      <p class="pull reveal">Education isn't just transferring information. It's expanding what someone believes they can do.</p>
+      <div class="artifact reveal" data-id="[ 08 · STUDENT FEEDBACK ]"><div class="art-inner"><div class="art-gallery"><img src="Asset/Student testimonial 1.png" alt="Student testimonial 1"><img src="Asset/Student testimonial 2.jpg" alt="Student testimonial 2"></div></div><div class="art-cap"><span class="meta">evidence</span><span class="meta">scan 08</span></div></div>
+    </div>
+  </div>
+</section>
 
-  <script>
-    (function () {
-      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      var chapters = [
-        { n: '01', t: 'THE FIRST COMPUTER', id: 'ch1', c: '#4600FF' },
-        { n: '02', t: 'LEARNING TO TEACH', id: 'ch2', c: '#FF00FF' },
-        { n: '03', t: 'LEARNING TO CREATE', id: 'ch3', c: '#FAB300' },
-        { n: '04', t: 'WHEN AI CHANGED THE GAME', id: 'ch4', c: '#2B6BFF' },
-        { n: '05', t: 'FINDING IMAGI', id: 'ch5', c: '#3DD68C' },
-        { n: '06', t: 'WHAT I BRING', id: 'ch6', c: '#292929' },
-        { n: '07', t: 'WHY IMAGI', id: 'ch7', c: '#4600FF' }
-      ];
+<!-- CH4 -->
+<section class="chapter" id="ch4" data-ch="4" style="--spinec:#2B6BFF">
+  <div class="ch-wrap">
+    <div class="ch-head reveal">
+      <div class="ch-bignum">04</div>
+      <div class="ch-headmeta"><span class="meta">Case File 04 · Paper becomes digital</span><h2 class="ch-title">When AI changed how I learn</h2></div>
+    </div>
+    <div class="ch-body">
+      <p class="lead reveal">I started exploring AI seriously around 2024, and by 2025 it was deep in how I work.</p>
+      <p class="reveal">The first time I used AI to build a website, I was genuinely shocked by what was possible.</p>
+      <p class="reveal">It changed how I approach ideas. I could explore, learn, prototype, build, and test faster.</p>
+      <p class="pull reveal">AI became a multiplier for me. Not a replacement for thinking.</p>
+      <div class="pipeline" id="pipeline">
+        <p class="reveal meta" style="margin-bottom:.9rem">The workflow — tap a stage to open its artifact</p>
+        <div class="pipe-steps reveal">
+          <button class="pipe-btn active" data-step="0">IDEA</button><span class="pipe-arrow">▸</span>
+          <button class="pipe-btn" data-step="1">RESEARCH</button><span class="pipe-arrow">▸</span>
+          <button class="pipe-btn" data-step="2">EXPLORE</button><span class="pipe-arrow">▸</span>
+          <button class="pipe-btn" data-step="3">DESIGN</button><span class="pipe-arrow">▸</span>
+          <button class="pipe-btn" data-step="4">BUILD</button><span class="pipe-arrow">▸</span>
+          <button class="pipe-btn" data-step="5">TEST</button><span class="pipe-arrow">▸</span>
+          <button class="pipe-btn" data-step="6">ITERATE</button>
+        </div>
+        <div class="pipe-panel reveal" id="pipePanel"></div>
+        <p class="digital-shift">▚ the archive turns from paper into screens here ▚</p>
+      </div>
+      <p class="reveal">But I've seen the other side too. Students using AI to cheat, to avoid learning, to treat it as a shortcut instead of a tool for thinking. That made me ask a different question:</p>
+      <p class="pull reveal">What happens when children are taught to use AI to create, instead of simply using it to get answers?</p>
+      <p class="reveal">That question is one of the reasons imagi caught my attention.</p>
+    </div>
+  </div>
+</section>
 
-      /* COVER */
-      var cover = document.getElementById('cover');
-      document.getElementById('startBtn').addEventListener('click', function () {
-        cover.classList.add('hide');
-        document.body.classList.remove('no-scroll');
-        document.getElementById('story').classList.add('show');
-        document.getElementById('shelf').classList.add('show');
-        document.getElementById('mshelf').classList.add('show');
-        document.getElementById('filetag').classList.add('show');
-        setTimeout(function () { document.getElementById('ch1').scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); }, 250);
-      });
+<!-- CH5 -->
+<section class="chapter" id="ch5" data-ch="5" style="--spinec:#3DD68C">
+  <div class="ch-wrap">
+    <div class="ch-head reveal">
+      <div class="ch-bignum">05</div>
+      <div class="ch-headmeta"><span class="meta">Case File 05 · Discovery</span><h2 class="ch-title">Finding imagi</h2></div>
+    </div>
+    <div class="ch-body">
+      <p class="lead reveal">I discovered imagi while researching startups building interesting things. I went down a rabbit hole.</p>
+      <div class="rabbit reveal">
+        <div class="rabbit-step"><span class="rb-num">01</span> imagi</div>
+        <div class="rabbit-step"><span class="rb-num">02</span> the founders</div>
+        <div class="rabbit-step"><span class="rb-num">03</span> the product</div>
+        <div class="rabbit-step"><span class="rb-num">04</span> the mission</div>
+        <div class="rabbit-step"><span class="rb-num">05</span> AI literacy &amp; education</div>
+        <div class="rabbit-step"><span class="rb-num">06</span> "I want to work here."</div>
+      </div>
+      <p class="reveal">I watched your videos and researched the company and the founders. I found Dora. I found Beatrice. And the more I learned, the more I wanted to understand what you were building.</p>
+      <div class="founders">
+        <div class="artifact reveal" data-id="[ 14 · DORA + BEATRICE ]"><div class="art-inner"><img src="Asset/Dora + Beatrice.jpg" alt="Dora and Beatrice"></div><div class="art-cap"><span class="meta">public profile</span><span class="meta">scan 14</span></div></div>
+      </div>
+      <div class="imagi-note reveal">
+        <span class="label">▸ WHY THIS CAUGHT MY ATTENTION</span>
+        What caught me wasn't just that imagi teaches children AI. It was the philosophy behind it.
+      </div>
+      <p class="pull reveal">AI should expand what children can create, not replace the process of learning.</p>
+      <p class="reveal">I'm drawn to a team that's deeply serious about the problem while keeping creativity and enjoyment in how they build. I know what technology did for me early, and what AI does for me now. I want more people to experience technology as something they create with, not just consume.</p>
+      <div class="imagi-note reveal">
+        <span class="label">▸ ON FILE · IMAGI</span>
+        imagi is building a safe education layer between AI tools and schools, helping students and educators use AI in structured, creative ways. Its message says it plainly: from cheating to creating with AI.
+        <br><br><a href="https://imagilabs.com/pages/about-us" target="_blank" rel="noopener">imagilabs.com/about-us ▸</a>
+      </div>
+      <div class="facts reveal">
+        <div class="fact"><b>0.7M+</b><span>children</span></div>
+        <div class="fact"><b>30k+</b><span>educators</span></div>
+        <div class="fact"><b>100+</b><span>districts</span></div>
+        <div class="fact"><b>140+</b><span>countries</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      /* SHELVES */
-      var shelf = document.getElementById('shelf'), mshelf = document.getElementById('mshelf');
-      chapters.forEach(function (c) {
-        var b = document.createElement('button'); b.className = 'spine'; b.style.setProperty('--spinec', c.c);
-        b.setAttribute('aria-label', 'Chapter ' + c.n + ': ' + c.t);
-        b.innerHTML = '<span class="sn">' + c.n + '</span><span class="st">' + c.t + '</span>';
-        b.addEventListener('click', function () { document.getElementById(c.id).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); });
-        shelf.appendChild(b);
-        var m = document.createElement('button'); m.className = 'mspine'; m.style.setProperty('--spinec', c.c);
-        m.setAttribute('aria-label', 'Chapter ' + c.n + ': ' + c.t);
-        m.innerHTML = '<span>' + c.n + '</span> ' + c.t;
-        m.addEventListener('click', function () { document.getElementById(c.id).scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' }); });
-        mshelf.appendChild(m);
-      });
-      var spines = shelf.querySelectorAll('.spine'), mspines = mshelf.querySelectorAll('.mspine');
+<!-- CH6 -->
+<section class="chapter" id="ch6" data-ch="6" style="--spinec:#292929">
+  <div class="ch-wrap">
+    <div class="ch-head reveal">
+      <div class="ch-bignum">06</div>
+      <div class="ch-headmeta"><span class="meta">Case File 06 · The toolkit</span><h2 class="ch-title">Why I think I belong in this room</h2></div>
+    </div>
+    <div class="ch-body">
+      <p class="lead reveal">My experience has given me a combination that feels deeply relevant to what imagi is building. Tap a word:</p>
+      <div class="reveal-strip reveal">
+        <button class="rword" data-word="education">EDUCATION</button>
+        <button class="rword" data-word="design">DESIGN</button>
+        <button class="rword" data-word="ai">AI</button>
+        <button class="rword" data-word="build">BUILD</button>
+        <button class="rword" data-word="children">CHILDREN</button>
+      </div>
+      <div class="rword-panel" id="rwordPanel"><span class="tag">▸ TAP A WORD ABOVE</span><p>Each part of my background points at the same problem imagi is solving.</p></div>
+      <p class="reveal">I've designed fintech, SaaS, AI and Web3 products, and used Claude Code to turn designs into working ones. I've studied Education Mathematics and Computer Science. I've taught thousands of people, taught children, and designed products for students.</p>
+      <p class="pull reveal">I've experienced technology as a student, an educator, a designer, and a builder.</p>
+      <p class="reveal" style="font-weight:600;margin-top:1.6rem">MindWell brought many of those worlds together.</p>
+      <div class="mw reveal" id="mindwell">
+        <div class="mw-toggle"><button class="mw-tab active" data-mw="before">BEFORE</button><button class="mw-tab" data-mw="after">AFTER</button></div>
+        <div class="mw-flow active" data-flow="before">
+          <div class="mw-stage"><span class="s-label">MY ASSUMPTION</span><p>I assumed I knew what students would want from an AI mental-health product.</p></div>
+          <div class="mw-stage"><span class="s-label">RESEARCH</span><p>I spoke with students and tested the product. Some of my assumptions were wrong.</p></div>
+        </div>
+        <div class="mw-flow" data-flow="after">
+          <div class="mw-stage"><span class="s-label">SIMPLIFIED</span><p>I simplified the core journeys and changed the AI interaction.</p></div>
+          <div class="mw-stage"><span class="s-label">BUILT</span><p>I iterated the prompts and AI behaviour, building it with AI-assisted development, including Claude Code.</p></div>
+          <div class="mw-stage"><span class="s-label">OBSERVED</span><p>I watched real users and fixed issues based on what I saw.</p></div>
+          <div class="mw-lesson">The technology is never the point. The person using it is.</div>
+        </div>
+      </div>
+      <div class="artifact reveal" data-id="[ 15 · MINDWELL ]"><div class="art-inner"><img src="Asset/Mindwell.png" alt="Mindwell case study"></div><div class="art-cap"><span class="meta">case study</span><span class="meta">frame 15</span></div></div>
+      <div class="artifact reveal" data-id="[ 16 · EWAVE ]"><div class="art-inner"><img src="Asset/Ewave.jpg" alt="Ewave Finance"></div><div class="art-cap"><span class="meta">$100K+ beta</span><span class="meta">frame 16</span></div></div>
+      <div class="split reveal">
+        <div class="split-col design"><h4>DESIGN</h4><ul><li>Figma</li><li>Research</li><li>Flows</li><li>Systems</li><li>Prototypes</li></ul></div>
+        <div class="split-mid">+</div>
+        <div class="split-col build"><h4>BUILD</h4><ul><li>Claude Code</li><li>React</li><li>HTML / CSS</li><li>AI-assisted dev</li><li>Working products</li></ul></div>
+        <div class="split-plus">DESIGN + BUILD</div>
+      </div>
+      <div class="artifact reveal" data-id="[ 17 · DESIGN + BUILD ]"><div class="art-inner"><img src="Asset/Design + Build.jpg" alt="Design and build"></div><div class="art-cap"><span class="meta">tooling</span><span class="meta">frame 17</span></div></div>
+      <p class="reveal">And one more thing I'd bring: I figure things out. I don't always know the answer when I start, and I'm comfortable learning, experimenting, and improving until I find a way forward.</p>
+    </div>
+  </div>
+</section>
 
-      /* REVEAL */
-      var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }); }, { threshold: 0.1, rootMargin: '0px 0px -6% 0px' });
-      document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+<!-- CH7 -->
+<section class="chapter" id="ch7" data-ch="7" style="--spinec:#4600FF">
+  <div class="ch-wrap">
+    <div class="ch-head reveal">
+      <div class="ch-bignum">07</div>
+      <div class="ch-headmeta"><span class="meta">Case File 07 · Conclusion</span><h2 class="ch-title">So, why imagi?</h2></div>
+    </div>
+    <div class="ch-body">
+      <p class="lead reveal">Because this connects almost every chapter of my life.</p>
+      <p class="reveal">The child introduced to computers early. The teenager who found technology could be a creative tool. The designer, the education student, the tutor who's watched students discover what they're capable of, the builder who found what AI can unlock. And the person who has seen both sides of AI: how it accelerates learning, and how it becomes a shortcut when no one teaches you to use it properly.</p>
+      <p class="pull reveal">Children deserve more than access to technology.</p>
+      <p class="reveal">They deserve to understand it. Question it. Create with it. And eventually, shape it.</p>
+      <p class="reveal">That's what excites me about imagi. Technology changed the trajectory of my life, and I'd love to help give another child that same chance.</p>
+      <span class="annot reveal">that's why I want to build with imagi.</span>
+    </div>
+  </div>
+</section>
 
-      /* PROGRESS + ACTIVE */
-      var progress = document.getElementById('progress'), filetag = document.getElementById('filetag');
-      var chSections = document.querySelectorAll('.chapter');
-      function onScroll() {
-        var st = window.scrollY || document.documentElement.scrollTop;
-        var h = document.documentElement.scrollHeight - window.innerHeight;
-        progress.style.width = (h > 0 ? (st / h * 100) : 0) + '%';
-        var mid = st + window.innerHeight * 0.4; var active = 0;
-        chSections.forEach(function (sec, i) { if (sec.offsetTop <= mid) active = i; });
-        spines.forEach(function (s, i) { s.classList.toggle('active', i === active); });
-        mspines.forEach(function (s, i) { s.classList.toggle('active', i === active); });
-        if (chapters[active]) { filetag.innerHTML = 'CASE FILE <b>' + chapters[active].n + '</b> / 07 — ' + chapters[active].t; }
-        // keep active mobile spine in view
-        if (mspines[active] && mshelf.classList.contains('show')) {/* passive */ }
-      }
-      window.addEventListener('scroll', onScroll, { passive: true });
+</main>
 
-      /* CH3 teaching card */
-      var tcard = document.getElementById('tcard');
-      function toggleT() { tcard.classList.toggle('opened'); }
-      tcard.addEventListener('click', toggleT);
-      tcard.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleT(); } });
+<!-- ============ FINALE ============ -->
+<section id="finale" class="sealed">
+  <div class="edges"></div>
+  <span class="frag" style="top:14%;left:8%">scan 01 · childhood</span>
+  <span class="frag" style="top:22%;right:9%">scan 07 · teaching</span>
+  <span class="frag" style="top:40%;left:6%">frame 11 · claude code</span>
+  <span class="frag" style="bottom:26%;right:8%">frame 15 · mindwell</span>
+  <span class="frag" style="bottom:16%;left:12%">frame 16 · ewave</span>
+  <span class="frag" style="top:34%;right:16%">idea → build → iterate</span>
+  <div class="finale-inner">
+    <div class="fin-pagenum">07 / 07 — INSIDE COVER</div>
+    <p class="fin-line one" id="finLine1">Technology changed the trajectory of my life.</p>
+    <p class="fin-line two" id="finLine2">Now I want to help the next generation discover what's possible.</p>
+    <p class="fin-title" id="finTitle">Why I want to build with imagi.</p>
+    <div class="signoff" id="signoff">
+      <div class="name">Praise Akinde</div>
+      <div class="role">PRODUCT DESIGNER</div>
+      <div class="links">
+        <a href="#" data-link="portfolio">PORTFOLIO ▸</a>
+        <a href="#" data-link="linkedin">LINKEDIN ▸</a>
+        <a href="#" data-link="email">EMAIL ▸</a>
+      </div>
+      <p class="fin-colophon">PRAISE AKINDE<br>WHY I WANT TO BUILD WITH IMAGI · 2026</p>
+    </div>
+  </div>
+</section>
 
-      /* PIPELINE */
-      var pipeData = [
-        { t: 'IDEA', a: 'Concept notes', d: 'It starts with a question or a spark. AI helps me shape a rough idea into something worth exploring.' },
-        { t: 'RESEARCH', a: 'Research material', d: 'I dig into the problem and the people. AI accelerates how fast I understand an unfamiliar space.' },
-        { t: 'EXPLORE', a: 'Direction studies', d: 'I generate and compare directions quickly, so I can find the strong ones instead of guessing.' },
-        { t: 'DESIGN', a: 'Figma frames', d: 'Figma and product thinking take over. Flows, systems, and the actual experience.' },
-        { t: 'BUILD', a: 'Claude Code', d: 'I turn designs into working products with Claude Code, React, and AI-assisted development.' },
-        { t: 'TEST', a: 'Product interaction', d: 'I put it in front of real people and watch. What they do matters more than what I assumed.' },
-        { t: 'ITERATE', a: 'Before / after', d: 'I fix what breaks, sharpen what works, and go again. The loop is the point.' }
-      ];
-      var pipePanel = document.getElementById('pipePanel'), pipeBtns = document.querySelectorAll('.pipe-btn');
-      function setPipe(i) { pipeBtns.forEach(function (b, j) { b.classList.toggle('active', j === i); }); pipePanel.innerHTML = '<span class="tag">STAGE ' + (i + 1) + ' / 7 · ARTIFACT: ' + pipeData[i].a.toUpperCase() + '</span><h4>' + pipeData[i].t + '</h4><p>' + pipeData[i].d + '</p>'; }
-      pipeBtns.forEach(function (b) { b.addEventListener('click', function () { setPipe(+b.dataset.step); }); });
-      setPipe(0);
+<div class="end-mark sealed" id="endmark">◆ END OF ARCHIVE ◆</div>
 
-      /* HOVER WORDS */
-      var wordData = {
-        education: { tag: 'EDUCATION', txt: 'Education Mathematics gave me the foundation. I learned how to relate to students and think about learning from their side of the desk.' },
-        design: { tag: 'DESIGN', txt: 'Product Design across fintech, SaaS, AI and Web3. Currently Founding Product Designer at Ewave Finance, owning design end to end.' },
-        ai: { tag: 'AI', txt: 'AI-native since 2025. I use it to explore, learn, prototype and build faster. A multiplier, not a replacement for thinking.' },
-        build: { tag: 'BUILD', txt: 'I use Claude Code and React to turn designs into working products. I don\'t just design with AI. I build with it.' },
-        children: { tag: 'CHILDREN', txt: 'I\'ve taught 7 and 8 year olds basic UI/UX and coding, including HTML and web development. Watching them realise they can make things is the best part.' }
-      };
-      var rwordPanel = document.getElementById('rwordPanel'), rwords = document.querySelectorAll('.rword');
-      rwords.forEach(function (w) {
-        w.addEventListener('click', function () {
-          rwords.forEach(function (x) { x.classList.remove('on'); }); w.classList.add('on');
-          var d = wordData[w.dataset.word];
-          rwordPanel.classList.remove('active'); void rwordPanel.offsetWidth; rwordPanel.classList.add('active');
-          rwordPanel.innerHTML = '<span class="tag">▸ ' + d.tag + '</span><p>' + d.txt + '</p>';
-        });
-      });
+<!-- ============ DEV ============ -->
+<button class="dev-toggle sealed" id="devToggle">DEV · ASSETS</button>
+<section id="asset-checklist">
+  <h3>ASSET CHECKLIST — replace placeholders before sending</h3>
+  <table>
+    <thead><tr><th>ID</th><th>Asset needed</th><th>Purpose</th></tr></thead>
+    <tbody>
+      <tr><td>01</td><td>Childhood / early technology</td><td>Chapter 1</td></tr>
+      <tr><td>02</td><td>Early graphic design</td><td>Chapter 1</td></tr>
+      <tr><td>03</td><td>Design evolution</td><td>Chapter 1</td></tr>
+      <tr><td>04</td><td>Education / university</td><td>Chapter 2</td></tr>
+      <tr><td>05</td><td>Early Product Design</td><td>Chapter 2</td></tr>
+      <tr><td>06</td><td>TechCrush teaching</td><td>Chapter 3</td></tr>
+      <tr><td>07</td><td>Teaching children</td><td>Chapter 3</td></tr>
+      <tr><td>08</td><td>Student testimonials</td><td>Chapter 3</td></tr>
+      <tr><td>09</td><td>First AI workflow</td><td>Chapter 4</td></tr>
+      <tr><td>10</td><td>AI workflow (pipeline)</td><td>Chapter 4</td></tr>
+      <tr><td>11</td><td>Claude Code / building</td><td>Chapter 4</td></tr>
+      <tr><td>12</td><td>imagi discovery</td><td>Chapter 5</td></tr>
+      <tr><td>13</td><td>Research rabbit hole</td><td>Chapter 5</td></tr>
+      <tr><td>14</td><td>Dora + Beatrice</td><td>Chapter 5</td></tr>
+      <tr><td>15</td><td>MindWell</td><td>Chapter 6</td></tr>
+      <tr><td>16</td><td>Ewave</td><td>Chapter 6</td></tr>
+      <tr><td>17</td><td>Design + Build</td><td>Chapter 6</td></tr>
+    </tbody>
+  </table>
+</section>
 
-      /* MINDWELL */
-      var mwTabs = document.querySelectorAll('.mw-tab'), mwFlows = document.querySelectorAll('.mw-flow');
-      mwTabs.forEach(function (t) { t.addEventListener('click', function () { mwTabs.forEach(function (x) { x.classList.remove('active'); }); t.classList.add('active'); mwFlows.forEach(function (f) { f.classList.toggle('active', f.dataset.flow === t.dataset.mw); }); }); });
+<script>
+(function(){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var chapters=[
+    {n:'01',t:'THE FIRST COMPUTER',id:'ch1',c:'#4600FF'},
+    {n:'02',t:'LEARNING TO TEACH',id:'ch2',c:'#FF00FF'},
+    {n:'03',t:'LEARNING TO CREATE',id:'ch3',c:'#FAB300'},
+    {n:'04',t:'WHEN AI CHANGED THE GAME',id:'ch4',c:'#2B6BFF'},
+    {n:'05',t:'FINDING IMAGI',id:'ch5',c:'#3DD68C'},
+    {n:'06',t:'WHAT I BRING',id:'ch6',c:'#292929'},
+    {n:'07',t:'WHY IMAGI',id:'ch7',c:'#4600FF'}
+  ];
 
-      /* FINALE deconstruction */
-      var finSeen = false, finale = document.getElementById('finale');
-      new IntersectionObserver(function (es) {
-        es.forEach(function (e) {
-          if (e.isIntersecting && !finSeen) {
-            finSeen = true;
-            setTimeout(function () { finale.classList.add('settled'); }, reduce ? 0 : 600);
-            document.getElementById('finLine1').classList.add('in');
-            setTimeout(function () { document.getElementById('finLine2').classList.add('in'); }, reduce ? 0 : 1500);
-            setTimeout(function () { document.getElementById('finTitle').classList.add('in'); }, reduce ? 0 : 2700);
-            setTimeout(function () { document.getElementById('signoff').classList.add('in'); }, reduce ? 0 : 3300);
-          }
-        });
-      }, { threshold: 0.4 }).observe(finale);
+  /* HERO BOOKS — the shelf that IS the story (pull one to open) */
+  var opened=false;
+  function openArchive(targetId,pulledBook){
+    if(opened){document.getElementById(targetId).scrollIntoView({behavior:reduce?'auto':'smooth'});return;}
+    opened=true;
+    var story=document.getElementById('story'),finale=document.getElementById('finale');
+    var endmark=document.getElementById('endmark'),devt=document.getElementById('devToggle');
+    var hero=document.getElementById('hero');
+    if(hero) hero.classList.add('book-open');
+    if(pulledBook)pulledBook.classList.add('pulling');
+    var run=function(){
+      story.classList.remove('sealed');finale.classList.remove('sealed');
+      endmark.classList.remove('sealed');devt.classList.remove('sealed');
+      var hero=document.getElementById('hero');hero.classList.add('opening');
+      setTimeout(function(){hero.style.display='none';onScroll();
+        document.getElementById(targetId).scrollIntoView({behavior:reduce?'auto':'smooth'});
+      },reduce?0:520);
+    };
+    reduce?run():setTimeout(run,360);
+  }
 
-      /* SIGN-OFF guard */
-      document.querySelectorAll('.signoff .links a').forEach(function (a) { a.addEventListener('click', function (e) { if (a.getAttribute('href') === '#') { e.preventDefault(); var old = a.textContent; a.textContent = 'ADD LINK ▸'; setTimeout(function () { a.textContent = old; }, 1200); } }); });
+  var heroBooks=document.getElementById('heroBooks');
+  var heights=[210,168,196,150,184,162,204];
+  chapters.forEach(function(c,i){
+    var bk=document.createElement('button');bk.className='book';bk.style.setProperty('--bc',c.c);
+    bk.style.height=heights[i]+'px';
+    if(c.c==='#FAB300'||c.c==='#FAF578'){bk.style.color='#292929';}
+    bk.setAttribute('aria-label','Book '+c.n+': '+c.t+' — open this chapter');
+    bk.innerHTML='<span class="spine-no">'+c.n+'</span><span class="spine-label">'+c.t+'</span>';
+    bk.addEventListener('click',function(){openArchive(c.id,bk);});
+    heroBooks.appendChild(bk);
+  });
+  document.getElementById('heroScroll').addEventListener('click',function(){
+    var first=heroBooks.querySelector('.book');
+    openArchive('ch1',first);
+  });
 
-      /* DEV */
-      document.getElementById('devToggle').addEventListener('click', function () { document.getElementById('asset-checklist').classList.toggle('show'); });
+  /* SHELVES */
+  var shelf=document.getElementById('shelf'),mshelf=document.getElementById('mshelf');
+  chapters.forEach(function(c){
+    var b=document.createElement('button');b.className='spine';b.style.setProperty('--spinec',c.c);
+    b.setAttribute('aria-label','Chapter '+c.n+': '+c.t);
+    b.innerHTML='<span class="sn">'+c.n+'</span><span class="st">'+c.t+'</span>';
+    b.addEventListener('click',function(){document.getElementById(c.id).scrollIntoView({behavior:reduce?'auto':'smooth'});});
+    shelf.appendChild(b);
+    var m=document.createElement('button');m.className='mspine';m.style.setProperty('--spinec',c.c);
+    m.setAttribute('aria-label','Chapter '+c.n+': '+c.t);
+    m.innerHTML='<span>'+c.n+'</span> '+c.t;
+    m.addEventListener('click',function(){document.getElementById(c.id).scrollIntoView({behavior:reduce?'auto':'smooth'});});
+    mshelf.appendChild(m);
+  });
+  var spines=shelf.querySelectorAll('.spine'),mspines=mshelf.querySelectorAll('.mspine');
 
-      /* IMAGE SCROLL CAROUSELS — dot indicator sync */
-      document.querySelectorAll('.art-scroll').forEach(function(scroller){
-        var name=scroller.dataset.carousel;
-        var dotsContainer=document.querySelector('[data-dots="'+name+'"]');
-        if(!dotsContainer) return;
-        var dots=dotsContainer.querySelectorAll('.art-scroll-dot');
-        scroller.addEventListener('scroll',function(){
-          var scrollLeft=scroller.scrollLeft;
-          var width=scroller.offsetWidth;
-          var idx=Math.round(scrollLeft/width);
-          dots.forEach(function(d,i){d.classList.toggle('active',i===idx);});
-        },{passive:true});
-      });
+  /* REVEAL */
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:0.1,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
 
-      onScroll();
-    })();
-  </script>
+  /* PROGRESS + ACTIVE + scroll-reveal chrome */
+  var progress=document.getElementById('progress'),filetag=document.getElementById('filetag');
+  var shelfNav=document.getElementById('shelf'),mshelfNav=document.getElementById('mshelf');
+  var hero=document.getElementById('hero');
+  var chSections=document.querySelectorAll('.chapter');
+  function onScroll(){
+    var st=window.scrollY||document.documentElement.scrollTop;
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    progress.style.width=(h>0?(st/h*100):0)+'%';
+    // reveal nav + filetag once we're into the story
+    var heroH=hero&&hero.offsetParent!==null?hero.offsetHeight:0;
+    var past=opened&&st>(heroH*0.4);
+    filetag.classList.toggle('show',past);
+    shelfNav.classList.toggle('show',past);
+    mshelfNav.classList.toggle('show',past);
+    var mid=st+window.innerHeight*0.4;var active=0;
+    chSections.forEach(function(sec,i){if(sec.offsetTop<=mid)active=i;});
+    spines.forEach(function(s,i){s.classList.toggle('active',i===active);});
+    mspines.forEach(function(s,i){s.classList.toggle('active',i===active);});
+    if(chapters[active]){filetag.innerHTML='CASE FILE <b>'+chapters[active].n+'</b> / 07 — '+chapters[active].t;}
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+
+  /* CH3 teaching card */
+  var tcard=document.getElementById('tcard');
+  function toggleT(){tcard.classList.toggle('opened');}
+  tcard.addEventListener('click',toggleT);
+  tcard.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleT();}});
+
+  /* PIPELINE */
+  var pipeData=[
+    {t:'IDEA',a:'Concept notes',d:'It starts with a question or a spark. AI helps me shape a rough idea into something worth exploring.'},
+    {t:'RESEARCH',a:'Research material',d:'I dig into the problem and the people. AI accelerates how fast I understand an unfamiliar space.'},
+    {t:'EXPLORE',a:'Direction studies',d:'I generate and compare directions quickly, so I can find the strong ones instead of guessing.'},
+    {t:'DESIGN',a:'Figma frames',d:'Figma and product thinking take over. Flows, systems, and the actual experience.'},
+    {t:'BUILD',a:'Claude Code',d:'I turn designs into working products with Claude Code, React, and AI-assisted development.'},
+    {t:'TEST',a:'Product interaction',d:'I put it in front of real people and watch. What they do matters more than what I assumed.'},
+    {t:'ITERATE',a:'Before / after',d:'I fix what breaks, sharpen what works, and go again. The loop is the point.'}
+  ];
+  var pipePanel=document.getElementById('pipePanel'),pipeBtns=document.querySelectorAll('.pipe-btn');
+  function setPipe(i){pipeBtns.forEach(function(b,j){b.classList.toggle('active',j===i);});pipePanel.innerHTML='<span class="tag">STAGE '+(i+1)+' / 7 · ARTIFACT: '+pipeData[i].a.toUpperCase()+'</span><h4>'+pipeData[i].t+'</h4><p>'+pipeData[i].d+'</p>';}
+  pipeBtns.forEach(function(b){b.addEventListener('click',function(){setPipe(+b.dataset.step);});});
+  setPipe(0);
+
+  /* HOVER WORDS */
+  var wordData={
+    education:{tag:'EDUCATION',txt:'Education Mathematics gave me the foundation. I learned how to relate to students and think about learning from their side of the desk.'},
+    design:{tag:'DESIGN',txt:'Product Design across fintech, SaaS, AI and Web3. Currently Founding Product Designer at Ewave Finance, owning design end to end.'},
+    ai:{tag:'AI',txt:'AI-native since 2025. I use it to explore, learn, prototype and build faster. A multiplier, not a replacement for thinking.'},
+    build:{tag:'BUILD',txt:'I use Claude Code and React to turn designs into working products. I don\'t just design with AI. I build with it.'},
+    children:{tag:'CHILDREN',txt:'I\'ve taught 7 and 8 year olds basic UI/UX and coding, including HTML and web development. Watching them realise they can make things is the best part.'}
+  };
+  var rwordPanel=document.getElementById('rwordPanel'),rwords=document.querySelectorAll('.rword');
+  rwords.forEach(function(w){w.addEventListener('click',function(){
+    rwords.forEach(function(x){x.classList.remove('on');});w.classList.add('on');
+    var d=wordData[w.dataset.word];
+    rwordPanel.classList.remove('active');void rwordPanel.offsetWidth;rwordPanel.classList.add('active');
+    rwordPanel.innerHTML='<span class="tag">▸ '+d.tag+'</span><p>'+d.txt+'</p>';
+  });});
+
+  /* MINDWELL */
+  var mwTabs=document.querySelectorAll('.mw-tab'),mwFlows=document.querySelectorAll('.mw-flow');
+  mwTabs.forEach(function(t){t.addEventListener('click',function(){mwTabs.forEach(function(x){x.classList.remove('active');});t.classList.add('active');mwFlows.forEach(function(f){f.classList.toggle('active',f.dataset.flow===t.dataset.mw);});});});
+
+  /* FINALE deconstruction */
+  var finSeen=false,finale=document.getElementById('finale');
+  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting&&!finSeen){finSeen=true;
+    setTimeout(function(){finale.classList.add('settled');},reduce?0:600);
+    document.getElementById('finLine1').classList.add('in');
+    setTimeout(function(){document.getElementById('finLine2').classList.add('in');},reduce?0:1500);
+    setTimeout(function(){document.getElementById('finTitle').classList.add('in');},reduce?0:2700);
+    setTimeout(function(){document.getElementById('signoff').classList.add('in');},reduce?0:3300);
+  }});},{threshold:0.4}).observe(finale);
+
+  /* SIGN-OFF guard */
+  document.querySelectorAll('.signoff .links a').forEach(function(a){a.addEventListener('click',function(e){if(a.getAttribute('href')==='#'){e.preventDefault();var old=a.textContent;a.textContent='ADD LINK ▸';setTimeout(function(){a.textContent=old;},1200);}});});
+
+  /* DEV */
+  document.getElementById('devToggle').addEventListener('click',function(){document.getElementById('asset-checklist').classList.toggle('show');});
+
+  onScroll();
+})();
+</script>
 </body>
-
 </html>
