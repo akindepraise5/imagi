@@ -136,9 +136,11 @@ body::before{
 .book .spine-no{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--pixel);font-size:.52rem;opacity:.85}
 .book:hover,.book:focus-visible{transform:translateY(-26px) rotate(-2deg);box-shadow:6px 8px 0 rgba(41,41,41,.28);outline:none;z-index:5}
 @media(max-width:640px){
-  .shelf-stage{overflow-x:auto;align-items:flex-start;-webkit-overflow-scrolling:touch;--book-max:clamp(120px,22vh,180px);padding-bottom:clamp(14px,2.4vh,24px)}
+  .shelf-stage{overflow-x:auto;-webkit-overflow-scrolling:touch;--book-max:clamp(120px,22vh,180px);padding-bottom:clamp(14px,2.4vh,24px)}
+  /* centre the shelf, but fall back to the start edge if it overflows so nothing is clipped */
+  .shelf-stage{align-items:safe center}
   .shelf-unit{min-width:max-content}
-  .books{justify-content:flex-start;gap:5px;padding:0 clamp(14px,4vw,26px)}
+  .books{justify-content:safe center;gap:5px;padding:0 clamp(14px,4vw,26px)}
   .book{width:38px}
   .book .spine-label{font-size:.58rem}
 }
