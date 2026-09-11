@@ -81,12 +81,12 @@ body::before{
    HERO — the shelf of books (no gate, scrolls straight in)
    ============================================================ */
 #hero{
-  position:relative;min-height:100vh;background:var(--paper);
+  position:relative;min-height:100vh;min-height:100svh;background:var(--paper);
   display:flex;flex-direction:column;overflow:hidden;padding:0;
 }
 .hero-top{flex:0 0 auto;display:flex;justify-content:space-between;align-items:center;padding:20px 26px 0}
 .hero-top .meta{font-size:.62rem}
-.hero-center{flex:1 1 auto;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:34px 24px 10px;position:relative;z-index:4}
+.hero-center{flex:1 1 auto;min-height:0;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:clamp(18px,4vh,34px) 24px clamp(8px,2vh,16px);position:relative;z-index:4}
 .hero-eyebrow{font-family:var(--pixel);font-size:.66rem;color:var(--purple);margin-bottom:1.2rem;letter-spacing:.04em}
 .hero-title{
   font-family:var(--serif);font-weight:400;font-size:clamp(2.4rem,9.5vw,5.6rem);
@@ -104,12 +104,22 @@ body::before{
 @keyframes nudge{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
 /* the shelf */
-.shelf-stage{flex:0 0 auto;position:relative;height:min(42vh,340px);display:flex;align-items:flex-end;justify-content:center;padding:0 14px}
-.books{display:flex;align-items:flex-end;gap:6px;max-width:1080px;width:100%;justify-content:center;position:relative;z-index:2}
-.shelf-plank{position:absolute;left:0;right:0;bottom:0;height:16px;background:var(--charcoal);z-index:3}
-.shelf-plank::after{content:"";position:absolute;left:0;right:0;bottom:-9px;height:9px;background:var(--paper-edge)}
+.shelf-stage{
+  flex:0 0 auto;position:relative;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  padding:0 14px clamp(34px,6vh,64px);
+  --book-max:clamp(128px,25vh,210px);
+}
+.shelf-unit{position:relative;width:max-content;max-width:100%;display:flex;flex-direction:column;align-items:center}
+.books{display:flex;align-items:flex-end;gap:6px;width:100%;justify-content:center;position:relative;z-index:2;padding:0 clamp(26px,5vw,64px)}
+/* the furniture: a solid plank the books sit on, with two end supports */
+.shelf-plank{position:relative;z-index:3;width:100%;height:22px;background:var(--charcoal);border-radius:2px;box-shadow:0 6px 14px rgba(41,41,41,.15)}
+.shelf-plank::before{content:"";position:absolute;left:0;right:0;top:0;height:7px;background:rgba(255,255,255,.15);border-radius:2px 2px 0 0}
+.shelf-legs{position:relative;z-index:3;width:100%;display:flex;justify-content:space-between}
+.shelf-legs span{width:24px;height:22px;background:var(--charcoal);border-radius:0 0 2px 2px}
 
 .book{
+  height:calc(var(--bh,1) * var(--book-max));
   flex:0 0 auto;width:44px;background:var(--bc,#666);color:#fff;cursor:pointer;position:relative;
   border-radius:3px 3px 0 0;border-top:2px solid rgba(255,255,255,.22);
   border-left:2px solid rgba(0,0,0,.14);
@@ -126,13 +136,29 @@ body::before{
 .book .spine-no{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--pixel);font-size:.52rem;opacity:.85}
 .book:hover,.book:focus-visible{transform:translateY(-26px) rotate(-2deg);box-shadow:6px 8px 0 rgba(41,41,41,.28);outline:none;z-index:5}
 @media(max-width:640px){
-  .shelf-stage{height:min(34vh,240px);overflow-x:auto;justify-content:flex-start;-webkit-overflow-scrolling:touch}
-  .books{justify-content:flex-start;padding:0 14px}
+  .shelf-stage{overflow-x:auto;align-items:flex-start;-webkit-overflow-scrolling:touch;--book-max:clamp(120px,22vh,180px);padding-bottom:clamp(26px,4.5vh,44px)}
+  .shelf-unit{min-width:max-content}
+  .books{justify-content:flex-start}
   .book{width:40px}
   .book .spine-label{font-size:.58rem}
 }
 .hero-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.58rem;color:var(--muted);z-index:4;letter-spacing:.04em}
 @media(max-width:640px){.hero-hint{left:auto;right:14px;transform:none}}
+
+/* short viewports: shrink the type so the whole shelf stays above the fold */
+@media(max-height:780px){
+  .hero-title{font-size:clamp(2rem,6.2vw,3.5rem);margin-bottom:.9rem}
+  .hero-eyebrow{margin-bottom:.7rem}
+  .hero-sub{font-size:clamp(.95rem,2.3vw,1.08rem)}
+  .hero-name{margin-top:1rem;font-size:.66rem}
+  .hero-scroll{margin-top:1rem}
+  .hero-scroll .arrow{width:28px;height:28px;border-width:2px}
+  .shelf-stage{--book-max:clamp(104px,21vh,164px);padding-bottom:clamp(34px,4.6vh,46px)}
+  .book{padding-bottom:10px}
+  .book .spine-no{top:8px}
+  .book .spine-label{font-size:.58rem;max-height:92%}
+  .hero-hint{bottom:9px;font-size:.54rem}
+}
 
 /* ============================================================
    TOP BAR + PROGRESS
@@ -466,8 +492,11 @@ body::before{
     </button>
   </div>
   <div class="shelf-stage">
-    <div class="books" id="heroBooks"></div>
-    <div class="shelf-plank"></div>
+    <div class="shelf-unit">
+      <div class="books" id="heroBooks"></div>
+      <div class="shelf-plank"></div>
+      <div class="shelf-legs" aria-hidden="true"><span></span><span></span></div>
+    </div>
     <span class="hero-hint">pull a book to open its chapter</span>
   </div>
 </header>
@@ -793,7 +822,7 @@ body::before{
   var heights=[210,168,196,150,184,162,204];
   chapters.forEach(function(c,i){
     var bk=document.createElement('button');bk.className='book';bk.style.setProperty('--bc',c.c);
-    bk.style.height=heights[i]+'px';
+    bk.style.setProperty('--bh',(heights[i]/210).toFixed(3));
     if(c.c==='#FAB300'||c.c==='#FAF578'){bk.style.color='#292929';}
     bk.setAttribute('aria-label','Book '+c.n+': '+c.t+' — open this chapter');
     bk.innerHTML='<span class="spine-no">'+c.n+'</span><span class="spine-label">'+c.t+'</span>';
