@@ -256,15 +256,33 @@ body::before{
 .artifact.tall .art-inner{min-height:280px}
 .artifact.wide{max-width:640px}
 .art-inner img{display:block;width:100%;height:auto;border:2px solid var(--paper-edge);background:var(--paper-2)}
-.art-gallery{display:flex;gap:10px;overflow-x:auto;padding-bottom:4px;-webkit-overflow-scrolling:touch;scroll-snap-type:x proximity}
-.art-gallery img{flex:0 0 auto;max-height:260px;width:auto;scroll-snap-align:start;border:2px solid var(--paper-edge);background:var(--paper-2)}
-.artifact.tall .art-gallery img{max-height:300px}
+.art-gallery{position:relative;overflow:hidden;border:2px solid var(--paper-edge);background:var(--paper-2);padding:0}
+.art-gallery-track{display:flex;transition:transform .35s var(--ease);will-change:transform}
+.art-gallery img{flex:0 0 100%;max-height:260px;width:100%;height:260px;object-fit:cover;border:none;background:var(--paper-2)}
+.artifact.tall .art-gallery img{height:300px}
+.art-gallery-nav{display:flex;justify-content:space-between;align-items:center;padding:10px 8px 0}
+.art-gallery-btn{font-family:var(--pixel);font-size:.58rem;border:3px solid #000;background:var(--white);color:var(--charcoal);padding:8px 10px;cursor:pointer;box-shadow:2px 2px 0 var(--charcoal);transition:transform .12s var(--ease),opacity .12s var(--ease)}
+.art-gallery-btn:hover,.art-gallery-btn:focus-visible{transform:translate(-1px,-1px);outline:none}
+.art-gallery-btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
 
 /* annotation sticky */
 .annot{
   display:inline-block;font-family:var(--serif);font-style:italic;font-size:1rem;color:var(--purple-ink);
   background:var(--yellow);padding:8px 14px;transform:rotate(-2deg);box-shadow:3px 3px 0 rgba(41,41,41,.2);
   margin:1rem 0;
+}
+.sell-point{
+  margin:2rem 0 1.2rem;padding:22px 24px;background:linear-gradient(180deg,#fff 0%,#f7f3ea 100%);
+  border:3px solid #000;box-shadow:var(--hard);position:relative;max-width:100%;
+}
+.sell-point p{
+  margin:0;font-family:var(--serif);font-size:clamp(1.3rem,2.4vw,2rem);line-height:1.12;
+  letter-spacing:-.02em;color:var(--charcoal);
+}
+.sell-point strong{
+  color:var(--purple);font-weight:700;
+  background:linear-gradient(transparent 58%, var(--yellow) 58%);
+  padding:0 3px;
 }
 
 /* ============================================================
@@ -395,9 +413,13 @@ body::before{
 .signoff .name{font-family:var(--sans);font-weight:700;font-size:1.4rem}
 .signoff .role{font-family:var(--mono);font-size:.64rem;color:var(--yellow);margin-top:6px;letter-spacing:.04em}
 .signoff .links{display:flex;gap:11px;justify-content:center;margin-top:1.7rem;flex-wrap:wrap}
-.signoff .links a{font-family:var(--pixel);font-size:.64rem;background:var(--yellow);color:var(--charcoal);border:3px solid #000;padding:14px 18px;text-decoration:none;box-shadow:var(--hard-pk);transition:.13s var(--ease)}
+.signoff .links a{font-family:var(--pixel);font-size:.64rem;background:var(--yellow);color:var(--charcoal);border:3px solid #000;padding:14px 18px;text-decoration:none;box-shadow:var(--hard-pk);transition:.13s var(--ease);flex:0 1 auto}
 .signoff .links a:hover{transform:translate(-2px,-2px);box-shadow:7px 7px 0 var(--pink)}
 .signoff .links a:focus-visible{outline:3px solid var(--paper);outline-offset:3px}
+@media(max-width:560px){
+  .ch-head{flex-direction:column;gap:10px}
+  .signoff .links a{flex:1 1 100%;max-width:260px}
+}
 .fin-colophon{margin-top:2.6rem;font-family:var(--mono);font-size:.6rem;color:var(--muted);line-height:1.8;letter-spacing:.04em}
 
 .end-mark{text-align:center;font-family:var(--mono);font-size:.6rem;color:var(--muted);padding:24px;background:var(--paper);letter-spacing:.05em}
@@ -639,7 +661,7 @@ body::before{
         <div class="split-plus">DESIGN + BUILD</div>
       </div>
       <div class="artifact reveal" data-id="[ 17 · DESIGN + BUILD ]"><div class="art-inner"><img src="Asset/Design + Build.jpg" alt="Design and build"></div><div class="art-cap"><span class="meta">tooling</span><span class="meta">frame 17</span></div></div>
-      <p class="reveal">And one more thing I'd bring: I figure things out. I don't always know the answer when I start, and I'm comfortable learning, experimenting, and improving until I find a way forward.</p>
+      <div class="sell-point reveal"><p>And one more thing I’d bring: <strong>I figure things out.</strong> I don’t always know the answer when I start, and I’m comfortable learning, experimenting, and improving until I find a way forward.</p></div>
     </div>
   </div>
 </section>
@@ -682,9 +704,10 @@ body::before{
       <div class="name">Praise Akinde</div>
       <div class="role">PRODUCT DESIGNER</div>
       <div class="links">
-        <a href="#" data-link="portfolio">PORTFOLIO ▸</a>
-        <a href="#" data-link="linkedin">LINKEDIN ▸</a>
-        <a href="#" data-link="email">EMAIL ▸</a>
+        <a href="https://praiseakindedesign.vercel.app/" target="_blank" rel="noopener noreferrer" data-link="portfolio">PORTFOLIO ▸</a>
+        <a href="https://www.linkedin.com/in/akindepraise/" target="_blank" rel="noopener noreferrer" data-link="linkedin">LINKEDIN ▸</a>
+        <a href="mailto:akindepraise5@gmail.com" data-link="email">EMAIL ▸</a>
+        <a href="Asset/Praise%20Akinde%20CV%20(New).pdf" download="Praise-Akinde-CV.pdf" data-link="resume">RESUME ▸</a>
       </div>
       <p class="fin-colophon">PRAISE AKINDE<br>WHY I WANT TO BUILD WITH IMAGI · 2026</p>
     </div>
@@ -819,6 +842,78 @@ body::before{
   function toggleT(){tcard.classList.toggle('opened');}
   tcard.addEventListener('click',toggleT);
   tcard.addEventListener('keydown',function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();toggleT();}});
+
+  /* CAROUSEL GALLERIES */
+  document.querySelectorAll('.art-gallery').forEach(function(gallery){
+    var images=Array.prototype.slice.call(gallery.querySelectorAll('img'));
+    if(images.length<2){return;}
+
+    var track=document.createElement('div');
+    track.className='art-gallery-track';
+    images.forEach(function(img){track.appendChild(img);});
+    gallery.innerHTML='';
+    gallery.appendChild(track);
+
+    var nav=document.createElement('div');
+    nav.className='art-gallery-nav';
+
+    var prev=document.createElement('button');
+    prev.type='button';
+    prev.className='art-gallery-btn';
+    prev.textContent='◀ PREV';
+    prev.disabled=true;
+
+    var next=document.createElement('button');
+    next.type='button';
+    next.className='art-gallery-btn';
+    next.textContent='NEXT ▶';
+
+    nav.appendChild(prev);
+    nav.appendChild(next);
+    gallery.appendChild(nav);
+
+    var current=0;
+    function updateGallery(){
+      track.style.transform='translateX(-'+(current*100)+'%)';
+      prev.disabled=current===0;
+      next.disabled=current===images.length-1;
+    }
+
+    function goNext(){
+      if(current<images.length-1){current++;updateGallery();}
+    }
+
+    function goPrev(){
+      if(current>0){current--;updateGallery();}
+    }
+
+    prev.addEventListener('click',goPrev);
+    next.addEventListener('click',goNext);
+
+    var touchStartX=0;
+    var touchStartY=0;
+    gallery.addEventListener('touchstart',function(e){
+      touchStartX=e.touches[0].clientX;
+      touchStartY=e.touches[0].clientY;
+    },{passive:true});
+
+    gallery.addEventListener('touchend',function(e){
+      if(!e.changedTouches||e.changedTouches.length===0){return;}
+      var deltaX=e.changedTouches[0].clientX-touchStartX;
+      var deltaY=e.changedTouches[0].clientY-touchStartY;
+      if(Math.abs(deltaX)>40 && Math.abs(deltaX)>Math.abs(deltaY)){
+        if(deltaX<0){goNext();}else{goPrev();}
+      }
+    },{passive:true});
+
+    gallery.addEventListener('keydown',function(e){
+      if(e.key==='ArrowRight'){goNext();}
+      if(e.key==='ArrowLeft'){goPrev();}
+    });
+
+    gallery.setAttribute('tabindex','0');
+    updateGallery();
+  });
 
   /* PIPELINE */
   var pipeData=[
