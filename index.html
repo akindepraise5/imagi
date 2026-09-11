@@ -107,7 +107,7 @@ body::before{
 .shelf-stage{
   flex:0 0 auto;position:relative;
   display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
-  padding:0 14px clamp(34px,6vh,64px);
+  padding:0 14px clamp(18px,3.2vh,34px);
   --book-max:clamp(128px,25vh,210px);
 }
 .shelf-unit{position:relative;width:max-content;max-width:100%;display:flex;flex-direction:column;align-items:center}
@@ -136,14 +136,13 @@ body::before{
 .book .spine-no{position:absolute;top:12px;left:50%;transform:translateX(-50%);font-family:var(--pixel);font-size:.52rem;opacity:.85}
 .book:hover,.book:focus-visible{transform:translateY(-26px) rotate(-2deg);box-shadow:6px 8px 0 rgba(41,41,41,.28);outline:none;z-index:5}
 @media(max-width:640px){
-  .shelf-stage{overflow-x:auto;align-items:flex-start;-webkit-overflow-scrolling:touch;--book-max:clamp(120px,22vh,180px);padding-bottom:clamp(26px,4.5vh,44px)}
+  .shelf-stage{overflow-x:auto;align-items:flex-start;-webkit-overflow-scrolling:touch;--book-max:clamp(120px,22vh,180px);padding-bottom:clamp(14px,2.4vh,24px)}
   .shelf-unit{min-width:max-content}
-  .books{justify-content:flex-start}
-  .book{width:40px}
+  .books{justify-content:flex-start;gap:5px;padding:0 clamp(14px,4vw,26px)}
+  .book{width:38px}
   .book .spine-label{font-size:.58rem}
 }
-.hero-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font-family:var(--mono);font-size:.58rem;color:var(--muted);z-index:4;letter-spacing:.04em}
-@media(max-width:640px){.hero-hint{left:auto;right:14px;transform:none}}
+.hero-hint{flex:0 0 auto;text-align:center;font-family:var(--mono);font-size:.58rem;color:var(--muted);letter-spacing:.04em;padding:0 14px clamp(16px,2.6vh,28px);position:relative;z-index:4}
 
 /* short viewports: shrink the type so the whole shelf stays above the fold */
 @media(max-height:780px){
@@ -153,11 +152,11 @@ body::before{
   .hero-name{margin-top:1rem;font-size:.66rem}
   .hero-scroll{margin-top:1rem}
   .hero-scroll .arrow{width:28px;height:28px;border-width:2px}
-  .shelf-stage{--book-max:clamp(104px,21vh,164px);padding-bottom:clamp(34px,4.6vh,46px)}
+  .shelf-stage{--book-max:clamp(104px,21vh,164px);padding-bottom:clamp(16px,2.4vh,26px)}
   .book{padding-bottom:10px}
   .book .spine-no{top:8px}
   .book .spine-label{font-size:.58rem;max-height:92%}
-  .hero-hint{bottom:9px;font-size:.54rem}
+  .hero-hint{font-size:.54rem;padding-bottom:clamp(12px,2vh,20px)}
 }
 
 /* ============================================================
@@ -512,8 +511,8 @@ body::before{
       <div class="shelf-plank"></div>
       <div class="shelf-legs" aria-hidden="true"><span></span><span></span></div>
     </div>
-    <span class="hero-hint">tap a book to open its chapter</span>
   </div>
+  <p class="hero-hint">tap a book to open its chapter</p>
 </header>
 
 <!-- ============ CHROME ============ -->
