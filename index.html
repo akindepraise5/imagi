@@ -164,13 +164,24 @@ body::before{
    TOP BAR + PROGRESS
    ============================================================ */
 #progress{position:fixed;top:0;left:0;height:4px;background:var(--pink);z-index:700;width:0;transition:width .1s linear}
+#topchrome{position:fixed;top:14px;left:16px;z-index:600;display:flex;align-items:stretch;gap:6px;max-width:calc(100% - 32px)}
+#homebtn{
+  font-family:var(--mono);font-size:.62rem;letter-spacing:.03em;
+  background:var(--charcoal);color:var(--paper);border:none;padding:7px 11px;cursor:pointer;
+  opacity:0;pointer-events:none;flex:0 0 auto;
+  transition:opacity .5s var(--ease),background .2s var(--ease),color .2s var(--ease);
+}
+#homebtn.show{opacity:1;pointer-events:auto}
+#homebtn:hover{background:var(--yellow);color:var(--charcoal)}
+#homebtn:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
 #filetag{
-  position:fixed;top:14px;left:16px;z-index:600;font-family:var(--mono);font-size:.62rem;
+  font-family:var(--mono);font-size:.62rem;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
   background:var(--charcoal);color:var(--paper);padding:7px 11px;
   opacity:0;transition:opacity .5s var(--ease);letter-spacing:.03em;
 }
 #filetag.show{opacity:1}
 #filetag b{color:var(--yellow)}
+@media(max-width:560px){.ft-t{display:none}}
 
 /* ============================================================
    BOOK-SPINE SHELF (desktop rail)
@@ -459,7 +470,11 @@ body::before{
 }
 .fin-colophon{margin-top:2.6rem;font-family:var(--mono);font-size:.6rem;color:var(--muted);line-height:1.8;letter-spacing:.04em}
 
-.end-mark{text-align:center;font-family:var(--mono);font-size:.6rem;color:var(--muted);padding:24px;background:var(--paper);letter-spacing:.05em}
+.end-mark{text-align:center;font-family:var(--mono);font-size:.6rem;color:var(--muted);padding:24px;background:var(--paper);letter-spacing:.05em;display:flex;flex-direction:column;align-items:center;gap:16px}
+.end-home{font-family:var(--mono);font-size:.62rem;letter-spacing:.05em;background:var(--charcoal);color:var(--paper);border:none;padding:11px 16px;cursor:pointer;box-shadow:var(--hard-pk);transition:background .2s var(--ease),color .2s var(--ease),transform .2s var(--ease)}
+.end-home:hover{background:var(--yellow);color:var(--charcoal);transform:translate(-2px,-2px)}
+.end-home:focus-visible{outline:3px solid var(--purple);outline-offset:2px}
+@media(max-width:900px){.end-mark{padding-bottom:88px}}  /* clear the mobile chapter strip */
 
 /* DEV */
 .dev-toggle{position:fixed;bottom:70px;right:14px;z-index:750;font-family:var(--mono);font-size:.54rem;background:var(--charcoal);color:#9a9488;border:none;padding:7px 9px;cursor:pointer;box-shadow:var(--hard);opacity:.6}
@@ -487,7 +502,7 @@ body::before{
     <p class="hero-sub">Let me tell you a story. About a computer, a teacher, an <b>AI</b>, and why I ended up here.</p>
     <div class="hero-name">PRAISE AKINDE — PRODUCT DESIGNER</div>
     <button class="hero-scroll" id="heroScroll" aria-label="Open the first book">
-      <span>PULL A BOOK TO BEGIN</span>
+      <span>TAP A BOOK TO BEGIN</span>
       <span class="arrow">▾</span>
     </button>
   </div>
@@ -497,13 +512,16 @@ body::before{
       <div class="shelf-plank"></div>
       <div class="shelf-legs" aria-hidden="true"><span></span><span></span></div>
     </div>
-    <span class="hero-hint">pull a book to open its chapter</span>
+    <span class="hero-hint">tap a book to open its chapter</span>
   </div>
 </header>
 
 <!-- ============ CHROME ============ -->
 <div id="progress"></div>
-<div id="filetag">CASE FILE <b>01</b> / 07 — THE FIRST COMPUTER</div>
+<div id="topchrome">
+  <button id="homebtn" type="button" aria-label="Back to the shelf">◂ HOME</button>
+  <div id="filetag">CASE FILE <b>01</b> / 07 <span class="ft-t">— THE FIRST COMPUTER</span></div>
+</div>
 <nav id="shelf" aria-label="Chapters"></nav>
 <nav id="mshelf" aria-label="Chapters"></nav>
 
@@ -754,7 +772,7 @@ body::before{
   </div>
 </section>
 
-<div class="end-mark sealed" id="endmark">◆ END OF ARCHIVE ◆</div>
+<div class="end-mark sealed" id="endmark">◆ END OF ARCHIVE ◆<button type="button" class="end-home" id="endHome">◂ BACK TO THE SHELF</button></div>
 
 <!-- ============ DEV ============ -->
 <button class="dev-toggle sealed" id="devToggle">DEV · ASSETS</button>
@@ -818,6 +836,25 @@ body::before{
     reduce?run():setTimeout(run,360);
   }
 
+  /* back to the shelf: re-seal the story and bring the hero back */
+  function closeArchive(){
+    if(!opened)return;
+    opened=false;
+    var hero=document.getElementById('hero');
+    var pulled=hero.querySelector('.book.pulling');
+    if(pulled)pulled.classList.remove('pulling');
+    hero.classList.remove('book-open');
+    ['story','finale','endmark','devToggle'].forEach(function(id){
+      document.getElementById(id).classList.add('sealed');
+    });
+    hero.style.display='';
+    window.scrollTo(0,0);
+    void hero.offsetHeight;                 /* reflow so the hero fades back in */
+    requestAnimationFrame(function(){hero.classList.remove('opening');onScroll();});
+  }
+  document.getElementById('homebtn').addEventListener('click',closeArchive);
+  document.getElementById('endHome').addEventListener('click',closeArchive);
+
   var heroBooks=document.getElementById('heroBooks');
   var heights=[210,168,196,150,184,162,204];
   chapters.forEach(function(c,i){
@@ -856,6 +893,7 @@ body::before{
 
   /* PROGRESS + ACTIVE + scroll-reveal chrome */
   var progress=document.getElementById('progress'),filetag=document.getElementById('filetag');
+  var homebtn=document.getElementById('homebtn');
   var shelfNav=document.getElementById('shelf'),mshelfNav=document.getElementById('mshelf');
   var hero=document.getElementById('hero');
   var chSections=document.querySelectorAll('.chapter');
@@ -867,13 +905,14 @@ body::before{
     var heroH=hero&&hero.offsetParent!==null?hero.offsetHeight:0;
     var past=opened&&st>(heroH*0.4);
     filetag.classList.toggle('show',past);
+    homebtn.classList.toggle('show',opened);
     shelfNav.classList.toggle('show',past);
     mshelfNav.classList.toggle('show',past);
     var mid=st+window.innerHeight*0.4;var active=0;
     chSections.forEach(function(sec,i){if(sec.offsetTop<=mid)active=i;});
     spines.forEach(function(s,i){s.classList.toggle('active',i===active);});
     mspines.forEach(function(s,i){s.classList.toggle('active',i===active);});
-    if(chapters[active]){filetag.innerHTML='CASE FILE <b>'+chapters[active].n+'</b> / 07 — '+chapters[active].t;}
+    if(chapters[active]){filetag.innerHTML='CASE FILE <b>'+chapters[active].n+'</b> / 07 <span class="ft-t">— '+chapters[active].t+'</span>';}
   }
   window.addEventListener('scroll',onScroll,{passive:true});
 
